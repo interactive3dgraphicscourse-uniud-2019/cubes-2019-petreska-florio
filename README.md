@@ -2,7 +2,7 @@
 
 ![Image from Crossy Road game](http://vignette2.wikia.nocookie.net/crossyroad/images/a/a0/Unnamed.png/revision/latest?cb=20150716180741)
 
-##Prerequisites
+## Prerequisites
 
 - read carefully all slides and notes up to lecture 8 before you start. Try the proposed exercises.
 - familiarize with git and github:
@@ -12,14 +12,14 @@
 	- [Github desktop application](https://desktop.github.com)
 - [download three.js r84 and examples](https://github.com/mrdoob/three.js/archive/master.zip)
 
-##Hints
+## Hints
 
 - Try to work out a basic project which satisfies all requirements well before the deadline and as soon as possible: you will then use the remaining time to refine, improve and polish.
 - If you are stuck for too much time on a problem, ask for help, preferably in the forum.
 - the process is as important as the result. Use this project to learn a workflow, and how to use tools effectively. Experiment, and try to come up with efficient, elegant, and well commented code.
 - commit often in your git repository and with meaningful comments. 
 
-##Goals 
+## Goals 
 In this project you'll first create an interesting scene of your own design, made up just of cubes. The cubes can be
 translated, scaled and rotated as you wish. For inspiration, look at [Minecraft](https://minecraft.net/en-us/), 
 Legos, and voxel-based games such as [Crossy Road](http://www.crossyroad.com).
@@ -38,7 +38,7 @@ form of a greyscale image as input;
 In either case, see the next sections for more detailed instructions and suggestions. You are also required to document your
 work and write a final report, as detailed below. 
 
-##Starting code
+## Starting code
 
 I have provided two starting scenes, one without lights and textures, and one which includes a basic lighting setup 
 and an example of texture usage. Your final result should be obtained by modifiying ONE of these files. 
@@ -51,7 +51,7 @@ When using lights, it is better to use MeshPhongMaterial for the cubes. The exam
 
 The third starting code file is necessary only if you choose to create a terrain. It loads a *m by n* PNG image from a file and builds an array of *m x n* values where each value is a greyscale value in the range 0-255. The code assumes that the image is composed by four channels (RGBA) and the value of the three RGB channel is the same. If you use another kind of image, you will have to modify the code accordingly.
 
-##Steps 
+## Steps 
 
 1. clone the starting code in the repository.
 2. examine the starting code carefully. In the case of the code which uses lights, we are using stuff that has not been explained in the course yet. However, with some help from the [three.js documentation](https://threejs.org/docs/index.html#Manual/Introduction/Creating_a_scene), it should not be too hard to figure out what each line does. Try to play with the code and modify values, and gain some understanding by observing the result of your changes. Often, we don't need to fully understand how code really function, or the underlying theory.
@@ -79,7 +79,7 @@ Remove the code for orbiting the camera with the mouse and plan camera movements
 
 For producing the movie, you can use some screen capture application, and then, if you want, you can use video editing software to apply post effects, transitions, and color correction.	
 
-##Documenting and report
+## Documenting and report
 
 For project documentation and reporting, we use the [markdown format](https://daringfireball.net/projects/markdown/syntax), which is also the format of this document. Markdown is a lightweight markup language with plain text formatting syntax which is easy and quick to write, very human-readable, and that can be converted to HTML.
 
@@ -96,17 +96,17 @@ The report should be as brief as possible while covering the following points:
 - results, including images of the scenes created, taken in a way that clearly illustrates that they satisfy the specification.
 - brief explanation of the process that you used to make your scene. Include tools, assets, and planning steps.
 
-##Constraints
+## Constraints
 
 If you use textures, please make sure that you have the rights to include them. For example, search for images that come with a [CC Attribution, ShareAlike or NonCommercial licences](https://creativecommons.org/share-your-work/licensing-types-examples/). 
 
 You are allowed to take inspiration, or create models that reproduce what you see in images on the internet, but copying others' work, even with slight modifications, is forbidden and will have serious consequences beyond the deletion of your project. In any case, mention any source of inspiration in your journal and final report.
 
-##Follow-up
+## Follow-up
 
 You are welcome to extend your project after the deadline, in any way your think is interesting. For example, you could add javascript libraries that analyze music and derive values in real-time that can be fed to three.js for animation purposes, or you could extend your terrain generation software such that hidden cube faces are not created in three.js. If you do that before the final exam, you might get bonus points for this kind of activies - just let me know any progress you make.
 
-##Credits
+## Credits
 
 This project is inspired by the [Cubes Graphics Codex Project](http://graphicscodex.com/projects/cubes/index.html) by Morgan McGuire.
 
