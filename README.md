@@ -112,3 +112,7 @@ This project is inspired by the [Cubes Graphics Codex Project](http://graphicsco
 
 If you like voxels, check out [this three.js-based project](http://voxeljs.com).
 
+## Useful material and references
+
+Sometimes, some feature of the Javascript language can be tricky: [a growing list of quirks](http://bonsaiden.github.io/JavaScript-Garden/)
+
