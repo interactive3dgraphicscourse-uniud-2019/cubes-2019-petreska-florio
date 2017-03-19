@@ -1,6 +1,6 @@
 # Modeling and rendering with cubes
 
-![Image from Crossy Road game](http://vignette2.wikia.nocookie.net/crossyroad/images/a/a0/Unnamed.png/revision/latest?cb=20150716180741)
+![Image from Minecraft](https://jordanweagly.files.wordpress.com/2012/02/figure_4.png)
 
 ## Prerequisites
 
