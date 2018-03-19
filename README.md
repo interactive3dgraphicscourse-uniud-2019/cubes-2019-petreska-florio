@@ -10,7 +10,7 @@
 	- [Git Resources for Visual Learners](https://changelog.com/posts/git-resources-for-visual-learners)
 	- [Introduction to GitHub for Newcomers](https://www.youtube.com/watch?v=uNa9GOtM6NE&feature=youtu.be)
 	- [Github desktop application](https://desktop.github.com)
-- [download three.js r84 and examples](https://github.com/mrdoob/three.js/archive/master.zip)
+- [download three.js r90 and examples](https://github.com/mrdoob/three.js/archive/master.zip)
 
 ## Hints
 
