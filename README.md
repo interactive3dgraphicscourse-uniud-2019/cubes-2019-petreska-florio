@@ -63,8 +63,7 @@ The third starting code file is necessary only if you choose to create a terrain
 	- directly create your scene using the [three.js editor](https://threejs.org/editor/). In this case, you can use the "scene export" function to directly export the scene in the json-based three.js scene format. Once the result is saved as text file, it should be possible to load it into three.js using the (deprecated) SceneLoader or the new ObjectLoader. I write "it should be possible" because it is not entirely clear if and which of the two will work. So, in theory this solution requires the least amount of work; in practice, it will probably require you to dig into three.js code and maybe spend a few minutes googling for answers to problems. This is quite common with complex, continuously developed code such as three.js and game engines. You will always find bugs, poorly documented features or outdated examples. Learning how to cope with this situations, how to search and ask for help, e.g. on AnswerHub is an important skill than any developer should acquire.
 4. design and implement an animation. Aim for simple animations that can be expressed by a few translations or rotations, or that can be programmed through simple mathematical relations or even physics equations (like Kinematic equations). You might need to introduce nodes (Object3D) in your scene graph to make the animations easier to implement. As with several examples that we have seen, you can make the animation user-controllable by using [dat.gui] (https://github.com/dataarts/dat.gui). Look in three.js examples for how to connect the GUI controls to your scene.
 5. At this point, you need to choose whether to add a terrain or create a short movie. These alternative steps are explained below.
-6. Create a report of your work.
-7. On Monday 27th, I will download your repository and evaluate your work.
+6. Create a report of your work by the due deadline.
 
 ### Adding a terrain
 
