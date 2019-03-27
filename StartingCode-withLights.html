@@ -17,6 +17,7 @@
 	
 	</style>
 		<script src="lib/three.min.js"></script>
+		<script src="js/hello.js"></script>
 		<script src="lib/stats.min.js"></script>
 		<script src="lib/Coordinates.js"></script>
 		<script src="lib/OrbitControls.js"></script>
@@ -88,6 +89,10 @@
 			
 			controls = new THREE.OrbitControls( camera );
 			controls.addEventListener( 'change', Render );
+
+			greeter = new Hello("Greetings")
+
+			greeter.greet()
 			
 			
 		}
