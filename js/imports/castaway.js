@@ -5,11 +5,11 @@ class Castaway  {
      * @param {THREE.Scene} scene 
      */
     constructor(scene) {
+        this.walking = true
         this.ankleDirection = -1 //rendering option
         this.kneeDirection = 1 //rendering option
         this.hipDirection = -1 //rendering option
-        this.walking = true
-
+        
         var unit = .1 // dimensions of one basic cube
         this.bodyMaterial = new THREE.MeshBasicMaterial({color: 0xc68642}) // material for the skin
         this.pantsMaterial = new THREE.MeshBasicMaterial({color: 0x990000}) // material for pants
@@ -64,6 +64,12 @@ class Castaway  {
 
         this.pHipL.position.x = unit*3 // positioning leg mirrored on x axis
 
+        this.pKneeL = this.pHipL.children[0].children[2]
+
+        this.pAnkleL = this.pKneeL.children[2]
+
+        console.log(this.pKneeL)
+        
         this.mainPivot.add(this.pHipR) // mainPivot gains control of legs 
         this.mainPivot.add(this.pHipL)
 
@@ -86,6 +92,8 @@ class Castaway  {
 
 
         scene.add(this.mainPivot)
+
+        console.log(this.pHipL)
     }
 
     /**
@@ -126,46 +134,49 @@ class Castaway  {
     }
 
     walkAnimation() {
-        if(this.pHipR.rotation.x < -110*Math.PI/180) {
-            this.hDirection = 1
+        if(this.pHipR.rotation.x < -30*Math.PI/180) {
+            this.hipDirection = 1
         } 
 
 
-        if(this.pHipR.rotation.x > 90*Math.PI/180) {
-            this.hDirection = -1
+        if(this.pHipR.rotation.x > 30*Math.PI/180) {
+            this.hipDirection = -1
         } 
 
         if(this.pKnee.rotation.x < 0) {
-            this.kDirection = 1
+            this.kneeDirection = 1
         } 
-
-
-        if(this.pKnee.rotation.x > 90*Math.PI/180) {
-            this.kDirection = -1
-        } 
+        if(this.pKnee.rotation.x > 20*Math.PI/180) {
+            this.kneeDirection = -1
+        }  
         
-        if(this.pAnkle.rotation.x  < -30*Math.PI/180) {
-            this.direction = 1
+        /* if(this.pAnkle.rotation.x  < -25*Math.PI/180) {
+            this.ankleDirection = 1
         } 
 
 
-        if(this.pAnkle.rotation.x > 20*Math.PI/180) {
-            this.direction = -1
-        } 
+        if(this.pAnkle.rotation.x > 40*Math.PI/180) {
+            this.ankleDirection = -1
+        } */
 
-        this.pKnee.rotation.x += this.kDirection*Math.PI/180 
-        this.pAnkle.rotation.x += this.direction*Math.PI/180 
-        this.pHipR.rotation.x += this.hDirection*Math.PI/180
+         
+        //this.pAnkle.rotation.x += this.ankleDirection*Math.PI/180 
+        this.pKnee.rotation.x += this.kneeDirection*Math.PI/180
+        this.pHipR.rotation.x += this.hipDirection*Math.PI/180
+
+        //this.pAnkleL.rotation.x += this.ankleDirection*Math.PI/180 
+        this.pKneeL.rotation.x += this.kneeDirection*Math.PI/180 
+        this.pHipL.rotation.x += this.hipDirection*-1*Math.PI/180
+
     }
 
     /**
      * update position of the castaway
      */
     update() {
-        this.mainPivot.rotation.y += 1*Math.PI/180  
-
-        if(this.walking) {
+       if(this.walking) {
             this.walkAnimation()
+            this.mainPivot.position.z+=.01
         }
     }
 }
