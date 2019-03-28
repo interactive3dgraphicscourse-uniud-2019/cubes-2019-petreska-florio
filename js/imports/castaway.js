@@ -2,6 +2,7 @@ class Castaway  {
 
     constructor(scene) {
         this.direction = -1 //rendering option
+        this.kDirection = 1 //rendering option
 
         var unit = .1
         var baseCube = new THREE.BoxGeometry(unit, unit, unit)
@@ -32,6 +33,20 @@ class Castaway  {
 
         this.pKnee.add(this.pAnkle)
 
+        
+        
+        /* upper leg modeling */
+
+        var upperLegGroup = this.generateJointAndBone(unit, this.bodyMaterial, 4, 4, 4, this.bodyMaterial, 2, 8, 2)
+
+        upperLegGroup.bone.position.y = unit*-4
+
+        this.pHip = upperLegGroup.pivot
+
+        this.pKnee.position.y = unit*-8
+
+        this.pHip.add(this.pKnee)
+
          
 
         /*
@@ -45,8 +60,8 @@ class Castaway  {
 
         this.mainPivot = new THREE.Object3D()
 
-        this.pKnee.position.y = unit*5
-        this.mainPivot.add(this.pKnee)
+        this.pHip.position.y = unit*13
+        this.mainPivot.add(this.pHip)
 
         scene.add(this.mainPivot)
     }
@@ -72,12 +87,20 @@ class Castaway  {
     }
 
     update() {
-        this.mainPivot.rotation.y += 1*Math.PI/180 
-
-        this.pKnee.rotation.x += -1*Math.PI/180 
+        //this.mainPivot.rotation.y += 1*Math.PI/180 
 
         
-        if(this.pAnkle.rotation.x < -30*Math.PI/180) {
+
+        if(this.pKnee.rotation.x < 0) {
+            this.kDirection = 1
+        } 
+
+
+        if(this.pKnee.rotation.x > 90*Math.PI/180) {
+            this.kDirection = -1
+        } 
+        
+        if(this.pAnkle.rotation.x  < -30*Math.PI/180) {
             this.direction = 1
         } 
 
@@ -86,6 +109,7 @@ class Castaway  {
             this.direction = -1
         } 
 
+        this.pKnee.rotation.x += this.kDirection*Math.PI/180 
         this.pAnkle.rotation.x += this.direction*Math.PI/180 
         
             
