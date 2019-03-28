@@ -5,9 +5,10 @@ class Castaway  {
      * @param {THREE.Scene} scene 
      */
     constructor(scene) {
-        this.direction = -1 //rendering option
-        this.kDirection = 1 //rendering option
-        this.hDirection = -1
+        this.ankleDirection = -1 //rendering option
+        this.kneeDirection = 1 //rendering option
+        this.hipDirection = -1 //rendering option
+        this.walking = true
 
         var unit = .1 // dimensions of one basic cube
         this.bodyMaterial = new THREE.MeshBasicMaterial({color: 0xc68642}) // material for the skin
@@ -124,11 +125,7 @@ class Castaway  {
         return jointAndBone
     }
 
-    /**
-     * update position of the castaway
-     */
-    update() {
-        this.mainPivot.rotation.y += 1*Math.PI/180  
+    walkAnimation() {
         if(this.pHipR.rotation.x < -110*Math.PI/180) {
             this.hDirection = 1
         } 
@@ -159,7 +156,16 @@ class Castaway  {
         this.pKnee.rotation.x += this.kDirection*Math.PI/180 
         this.pAnkle.rotation.x += this.direction*Math.PI/180 
         this.pHipR.rotation.x += this.hDirection*Math.PI/180
-        
-            
+    }
+
+    /**
+     * update position of the castaway
+     */
+    update() {
+        this.mainPivot.rotation.y += 1*Math.PI/180  
+
+        if(this.walking) {
+            this.walkAnimation()
+        }
     }
 }
