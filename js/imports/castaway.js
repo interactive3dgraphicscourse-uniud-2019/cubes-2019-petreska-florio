@@ -1,7 +1,8 @@
 class Castaway  {
 
     constructor(scene) {
-        this.direction = -1
+        this.direction = -1 //rendering option
+
         var unit = .1
         var baseCube = new THREE.BoxGeometry(unit, unit, unit)
         this.bodyMaterial = new THREE.MeshBasicMaterial({color: 0xc68642})
@@ -10,34 +11,28 @@ class Castaway  {
         var cubea = new THREE.Mesh(baseCube, this.pantsMaterial)
 
         /* foot modeling */
-        this.pAnkle = new THREE.Object3D() //ankle pivot
-        var gFoot = new THREE.BoxGeometry(unit*4, unit*2, unit*6)
-        var gAnkle = new THREE.BoxGeometry(unit*4, unit, unit*4)
+        var ankleGroup = this.generateJointAndBone(unit, this.bodyMaterial, 4, 1, 4, this.bodyMaterial, 4, 2, 6)
 
-        var foot = new THREE.Mesh(gFoot, this.bodyMaterial)
-        var ankle = new THREE.Mesh(gAnkle, this.bodyMaterial)
+        ankleGroup.bone.position.y = unit*-1
+        ankleGroup.bone.position.z = unit*1
 
-        foot.position.y = unit*-1
-        foot.position.z = unit*1
+        this.pAnkle = ankleGroup.pivot
 
-        this.pAnkle.add(foot)
-        this.pAnkle.add(ankle)
+        
 
         /* lower leg modeling */
-        this.pKnee = new THREE.Object3D() //knee pivot
-        var gLowerLeg = new THREE.BoxGeometry(unit*2, unit*8, unit*2)
-        var gKnee = new THREE.BoxGeometry(unit*4, unit*2, unit*4)
 
-        var lowerLeg = new THREE.Mesh(gLowerLeg, this.bodyMaterial)
-        var knee = new THREE.Mesh(gKnee, this.bodyMaterial)
+        var lowerLegGroup = this.generateJointAndBone(unit, this.bodyMaterial, 4, 2, 4, this.bodyMaterial, 2, 8, 2)
 
-        lowerLeg.position.y = unit*-4
+        lowerLegGroup.bone.position.y = unit*-4
 
-        this.pKnee.add(lowerLeg)
-        this.pKnee.add(knee)
+        this.pKnee = lowerLegGroup.pivot
 
         this.pAnkle.position.y = unit*-8
+
         this.pKnee.add(this.pAnkle)
+
+         
 
         /*
 		//var texture = THREE.ImageUtils.loadTexture('textures/11635.jpg');
@@ -54,6 +49,26 @@ class Castaway  {
         this.mainPivot.add(this.pKnee)
 
         scene.add(this.mainPivot)
+    }
+
+    generateJointAndBone(unit, jMaterial, jx, jy, jz, bMaterial, bx, by, bz) {
+        var pJoint = new THREE.Object3D() //joint pivot
+        var gBone = new THREE.BoxGeometry(unit*bx, unit*by, unit*bz)
+        var gjoint = new THREE.BoxGeometry(unit*jx, unit*jy, unit*jz)
+
+        var bone = new THREE.Mesh(gBone, bMaterial)
+        var joint = new THREE.Mesh(gjoint, jMaterial)
+
+        pJoint.add(bone)
+        pJoint.add(joint)
+
+        var jointAndBone = {
+            joint: joint,
+            bone: bone,
+            pivot: pJoint
+        }
+      
+        return jointAndBone
     }
 
     update() {
