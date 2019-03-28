@@ -53,6 +53,21 @@ dove il codice del file HTML è stato suddiviso in `index.html`, `css/main.css` 
 
 Decidiamo anche di lavorare su diversi branch, in un primo momento pensiamo di crearne uno per il naufrago e uno per l'isola.
 
+## 28.03.2019
+Sviluppo della classe del naufrago. A partire dalle gambe si costruirà tutto il corpo del naufrago, così che il prima possibile si possa avere una struttura animabile.
+
+Abbiamo creato un metodo apposito per creare una coppia articolazione-osso, che sarà poi utilizzato per creare i nodi dell'albero deciso il 26.03.
+
+Abbiamo poi creato i primi tre nodi: caviglia, ginocchio e anca. 
+Duplicazione della gamba.
+
+Ad ogni nuova creazione aggiungiamo un'animazione per essere sicuri che le gerarchie funzionino come pensato.
+
+![](images/legs.png)
+
+Abbiamo poi speso del tempo per commentare e rendere il codice più comprensibile, anche attraverso l'utilizzo delle convenzioni di JSDoc
+
+
 
 
 
