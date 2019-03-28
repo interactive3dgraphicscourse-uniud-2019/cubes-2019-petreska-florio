@@ -3,6 +3,7 @@ class Castaway  {
     constructor(scene) {
         this.direction = -1 //rendering option
         this.kDirection = 1 //rendering option
+        this.hDirection = -1
 
         var unit = .1
         var baseCube = new THREE.BoxGeometry(unit, unit, unit)
@@ -41,11 +42,16 @@ class Castaway  {
 
         upperLegGroup.bone.position.y = unit*-4
 
-        this.pHip = upperLegGroup.pivot
+        this.pHipR = upperLegGroup.pivot
 
         this.pKnee.position.y = unit*-8
 
-        this.pHip.add(this.pKnee)
+        this.pHipR.add(this.pKnee)
+
+
+        /* duplicate leg */
+
+        
 
          
 
@@ -60,8 +66,15 @@ class Castaway  {
 
         this.mainPivot = new THREE.Object3D()
 
-        this.pHip.position.y = unit*13
-        this.mainPivot.add(this.pHip)
+        this.pHipR.position.y = unit*13
+        this.pHipR.position.x = unit*-4
+
+        this.pHipL = this.pHipR.clone()
+
+        this.pHipL.position.x = unit*4
+
+        this.mainPivot.add(this.pHipR)
+        this.mainPivot.add(this.pHipL)
 
         scene.add(this.mainPivot)
     }
@@ -90,6 +103,14 @@ class Castaway  {
         //this.mainPivot.rotation.y += 1*Math.PI/180 
 
         
+        if(this.pHipR.rotation.x < -110*Math.PI/180) {
+            this.hDirection = 1
+        } 
+
+
+        if(this.pHipR.rotation.x > 90*Math.PI/180) {
+            this.hDirection = -1
+        } 
 
         if(this.pKnee.rotation.x < 0) {
             this.kDirection = 1
@@ -111,16 +132,8 @@ class Castaway  {
 
         this.pKnee.rotation.x += this.kDirection*Math.PI/180 
         this.pAnkle.rotation.x += this.direction*Math.PI/180 
+        this.pHipR.rotation.x += this.hDirection*Math.PI/180
         
             
     }
-
-    /* pivoting */
-    /*
-    let newPetal = mPetal.clone()
-    let pivot = new THREE.Object3D()
-    pivot.rotation.y = angle*rad
-    pivot.add(newPetal)
-    scene.add(pivot)
-    */
 }
