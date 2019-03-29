@@ -65,7 +65,7 @@ Ad ogni nuova creazione aggiungiamo un'animazione per essere sicuri che le gerar
 
 ![](images/legs.png)
 
-Abbiamo poi speso del tempo per commentare e rendere il codice più comprensibile, anche attraverso l'utilizzo delle convenzioni di JSDoc e infine aggiunto alle gambe create una semplice animazione "walking".
+Abbiamo poi speso del tempo per commentare e rendere il codice più comprensibile, anche attraverso l'utilizzo delle convenzioni di JSDoc e infine aggiunto alle gambe create una semplice animazione "walkAnimation".
 
 Contemporaneamente abbiamo lavorato allo sviluppo della classe dell'isola. 
 
@@ -75,7 +75,11 @@ Dopodiché è stato creato un altro cubo, per rappresentare il mare, per il qual
 
 I singoli cubi che costituiscono la palma sono fatti tramite un cubo principale e poi cambiando le posizioni ai cloni di tale cubo.
 
+![](images/island.jpg)
+
 Facendo questo lavoro, abbiamo considerato che possiamo aggiungere un'animazione in più, minimale sulla palma, che dovrebbe muoversi da sinistra a destra come se fosse mossa dal vento.
+
+Abbiamo anche pensato ad ingrandire la spiaggia con un livello in più per dare più spazio al personaggio.
 
 
 ## 29.03.2019
@@ -85,6 +89,9 @@ Costruzione di una prima versione della testa del naufrago.
 
 ![](images/complete.png)
 
+Cambiamento dei materiali del naufrago per interagire con le luci
+
+![](images/material.png)
 
 
 
