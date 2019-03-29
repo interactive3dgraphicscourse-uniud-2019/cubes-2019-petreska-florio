@@ -13,6 +13,7 @@ class Castaway  {
         var unit = .1 // dimensions of one basic cube
         this.bodyMaterial = new THREE.MeshBasicMaterial({color: 0xc68642}) // material for the skin
         this.pantsMaterial = new THREE.MeshBasicMaterial({color: 0x990000}) // material for pants
+        this.hairMaterial = new THREE.MeshBasicMaterial({color: 0x000000}) // material for hair
 
         /* mainPivot will decide the position of the character in the scene
         it will always be centered between feet and at sole level to 
@@ -110,7 +111,8 @@ class Castaway  {
         this.pShoulderR = new THREE.Object3D() // shoulder pivot - moving lower arm 
         arm.add(this.pElbowR)   // lower arm is part of arm 
 
-        arm.position.y = unit*2
+        arm.position.y = unit*2.5
+        arm.position.x = unit*-1
 
         this.pShoulderR.add(arm) // arm is child of shoulder pivot (move shoulder -> move elbow -> move wrist)
 
@@ -135,7 +137,52 @@ class Castaway  {
 
         this.pWristL = this.pElbowL.children[2]
         
-        this.mainPivot.add(this.pShoulderL) // mainPivot gains control of legs 
+        this.mainPivot.add(this.pShoulderL) // mainPivot gains control of arms
+       
+        
+        /* neck and face modeling*/
+        this.head = new THREE.Object3D()
+        
+        var neck = new THREE.Mesh(new THREE.BoxGeometry(unit*4, unit*4, unit*3), this.bodyMaterial)
+        var skull = new THREE.Mesh(new THREE.BoxGeometry(unit*5, unit*5, unit*5), this.bodyMaterial)
+        var jaw = new THREE.Mesh(new THREE.BoxGeometry(unit*5, unit*3, unit*2), this.bodyMaterial)
+        var hairBack = new THREE.Mesh(new THREE.BoxGeometry(unit*4, unit*2, unit*1), this.hairMaterial)
+        var hairTop = new THREE.Mesh(new THREE.BoxGeometry(unit*4, unit*1, unit*2), this.hairMaterial)
+        var earR = new THREE.Mesh(new THREE.BoxGeometry(unit*1, unit*2, unit*1), this.bodyMaterial)
+        var nose = new THREE.Mesh(new THREE.BoxGeometry(unit*1, unit*1, unit*1), this.bodyMaterial)
+
+        skull.position.y = unit*2
+        skull.position.z = unit*1
+        jaw.position.z = unit*2.5
+        jaw.position.y = unit*-1
+        hairBack.position.y = unit*3
+        hairBack.position.z = unit*-2
+        hairTop.position.y = unit*5
+        hairTop.position.z = unit
+        earR.position.x = unit*-3
+        earR.position.z = unit*2
+        earR.position.y = unit
+        nose.position.z = unit*4
+
+        var earL = earR.clone()
+        earL.position.x = unit*3
+
+        this.head.add(skull)
+        this.head.add(jaw)
+        this.head.add(hairBack)
+        this.head.add(hairTop)
+        this.head.add(earR)
+        this.head.add(earL)
+        this.head.add(nose)
+
+        this.head.position.y = unit*26
+        this.head.position.z = unit*-2
+        
+        neck.position.y = unit*25
+        neck.position.z = unit*-2
+
+        this.mainPivot.add(this.head)
+        this.mainPivot.add(neck)
 
 
         /* body modeling */
@@ -144,7 +191,12 @@ class Castaway  {
 
         var bodyUpper = new THREE.Mesh(gBodyUpper, this.bodyMaterial)
         var bodyLower = new THREE.Mesh(gBodyLower, this.pantsMaterial)
+
+        var neckBase = new THREE.Mesh(new THREE.BoxGeometry(unit*10, unit*2, unit*2), this.bodyMaterial)
         
+        neckBase.position.y = unit*23
+        neckBase.position.z = unit*-1.5
+
         bodyLower.position.y = unit*15
         bodyLower.position.z = unit*-1.5
         
@@ -153,6 +205,7 @@ class Castaway  {
 
         this.mainPivot.add(bodyLower)
         this.mainPivot.add(bodyUpper)
+        this.mainPivot.add(neckBase)
 
 
         scene.add(this.mainPivot)
@@ -242,5 +295,10 @@ class Castaway  {
             this.walkAnimation()
             this.mainPivot.position.z+=.01
         }
+        if(this.head.rotation.x > -45*Math.PI/180 ) {
+            this.head.rotation.x += -1*Math.PI/180 
+        }
+
+        
     }
 }
