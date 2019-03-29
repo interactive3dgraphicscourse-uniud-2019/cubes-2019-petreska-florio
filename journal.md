@@ -78,6 +78,13 @@ I singoli cubi che costituiscono la palma sono fatti tramite un cubo principale 
 Facendo questo lavoro, abbiamo considerato che possiamo aggiungere un'animazione in più, minimale sulla palma, che dovrebbe muoversi da sinistra a destra come se fosse mossa dal vento.
 
 
+## 29.03.2019
+Costruzione delle braccia del naufrago con la loro gerarchia.
+
+Costruzione di una prima versione della testa del naufrago.
+
+![](images/complete.png)
+
 
 
 
