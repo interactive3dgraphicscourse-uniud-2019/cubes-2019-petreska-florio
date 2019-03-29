@@ -11,9 +11,9 @@ class Castaway  {
         this.hipDirection = -1 //rendering option
         
         var unit = .1 // dimensions of one basic cube
-        this.bodyMaterial = new THREE.MeshBasicMaterial({color: 0xc68642}) // material for the skin
-        this.pantsMaterial = new THREE.MeshBasicMaterial({color: 0x990000}) // material for pants
-        this.hairMaterial = new THREE.MeshBasicMaterial({color: 0x000000}) // material for hair
+        this.bodyMaterial = new THREE.MeshLambertMaterial({color: 0xc68642}) // material for the skin
+        this.pantsMaterial = new THREE.MeshLambertMaterial({color: 0x990000}) // material for pants
+        this.hairMaterial = new THREE.MeshLambertMaterial({color: 0x000000}) // material for hair
 
         /* mainPivot will decide the position of the character in the scene
         it will always be centered between feet and at sole level to 
