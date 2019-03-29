@@ -53,6 +53,31 @@ dove il codice del file HTML è stato suddiviso in `index.html`, `css/main.css` 
 
 Decidiamo anche di lavorare su diversi branch, in un primo momento pensiamo di crearne uno per il naufrago e uno per l'isola.
 
+## 28.03.2019
+Sviluppo della classe del naufrago. A partire dalle gambe si costruirà tutto il corpo del naufrago, così che il prima possibile si possa avere una struttura animabile.
+
+Abbiamo creato un metodo apposito per creare una coppia articolazione-osso, che sarà poi utilizzato per creare i nodi dell'albero deciso il 26.03.
+
+Abbiamo poi creato i primi tre nodi: caviglia, ginocchio e anca. 
+Duplicazione della gamba.
+
+Ad ogni nuova creazione aggiungiamo un'animazione per essere sicuri che le gerarchie funzionino come pensato.
+
+![](images/legs.png)
+
+Abbiamo poi speso del tempo per commentare e rendere il codice più comprensibile, anche attraverso l'utilizzo delle convenzioni di JSDoc e infine aggiunto alle gambe create una semplice animazione "walking".
+
+Contemporaneamente abbiamo lavorato allo sviluppo della classe dell'isola. 
+
+Abbiamo creato tre livelli, cioè i tre cubi principali che rappresentano l'isola, per i quali abbiamo usatouna texture ad alta definizione per la sabbia.
+
+Dopodiché è stato creato un altro cubo, per rappresentare il mare, per il quale abbiamo usato un'altra texture, resa poi  trasparente (con i valori: transparent: true, opacity: 0.4).
+
+I singoli cubi che costituiscono la palma sono fatti tramite un cubo principale e poi cambiando le posizioni ai cloni di tale cubo.
+
+Facendo questo lavoro, abbiamo considerato che possiamo aggiungere un'animazione in più, minimale sulla palma, che dovrebbe muoversi da sinistra a destra come se fosse mossa dal vento.
+
+
 
 
 
