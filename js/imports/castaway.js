@@ -67,8 +67,6 @@ class Castaway  {
         this.pKneeL = this.pHipL.children[0].children[2]
 
         this.pAnkleL = this.pKneeL.children[2]
-
-        console.log(this.pKneeL)
         
         this.mainPivot.add(this.pHipR) // mainPivot gains control of legs 
         this.mainPivot.add(this.pHipL)
@@ -85,20 +83,20 @@ class Castaway  {
         thumb.position.x = unit*-1 // positioning thumb relative to wrist pivot
         thumb.position.z = unit*1.5
         
-        this.pHand = handGroup.pivot // wrist pivot - moving the hand
+        this.pHandR = handGroup.pivot // wrist pivot - moving the hand
 
-        this.pHand.add(thumb) // add thumb to wrist pivot
+        this.pHandR.add(thumb) // add thumb to wrist pivot
 
         /* lower arm */
         var lowerArmGroup = Castaway.generateJointAndBone(unit, this.bodyMaterial, 2, 4, 4, this.bodyMaterial, 4, 2, 2)
 
         lowerArmGroup.bone.position.x = unit*-2 // positioning lower arm bone relative to elbow
 
-        this.pElbow = lowerArmGroup.pivot // elbow pivot - moving lower arm
+        this.pElbowR = lowerArmGroup.pivot // elbow pivot - moving lower arm
 
-        this.pHand.position.x = unit*-5 // positioning hand relative to elbow pivot
+        this.pHandR.position.x = unit*-5 // positioning hand relative to elbow pivot
 
-        this.pElbow.add(this.pHand) // hand pivot is child of elbow pivot
+        this.pElbowR.add(this.pHandR) // hand pivot is child of elbow pivot
 
         /* upper arm */
         var upperArmGroup = Castaway.generateJointAndBone(unit, this.bodyMaterial, 4, 4, 4, this.bodyMaterial, 4, 2, 2)
@@ -107,24 +105,38 @@ class Castaway  {
 
         var arm = upperArmGroup.pivot // arm container
 
-        this.pElbow.position.x = unit*-7 // positioning lower arm relative to shoulder pivot
+        this.pElbowR.position.x = unit*-7 // positioning lower arm relative to shoulder pivot
 
-        this.pShoulder = new THREE.Object3D() // shoulder pivot - moving lower arm 
-        arm.add(this.pElbow)   // lower arm is part of arm 
+        this.pShoulderR = new THREE.Object3D() // shoulder pivot - moving lower arm 
+        arm.add(this.pElbowR)   // lower arm is part of arm 
 
-        arm.position.x = unit*-2
         arm.position.y = unit*2
 
-        this.pShoulder.add(arm) // arm is child of shoulder pivot (move shoulder -> move elbow -> move wrist)
+        this.pShoulderR.add(arm) // arm is child of shoulder pivot (move shoulder -> move elbow -> move wrist)
 
 
         /* add arm to body */
-        this.pShoulder.position.y = unit*21
-        this.pShoulder.position.x = unit*-4
-        this.pShoulder.position.z = unit*-2.5
+        this.pShoulderR.position.y = unit*21
+        this.pShoulderR.position.x = unit*-4
+        this.pShoulderR.position.z = unit*-2.5
 
-        this.mainPivot.add(this.pShoulder)
+        this.mainPivot.add(this.pShoulderR)
         
+        /* duplicate arm */
+        this.pShoulderL = this.pShoulderR.clone()
+
+        this.pShoulderL.position.x = unit*4 // positioning arm mirrored on x axis
+        this.pShoulderL.children[0].rotation.z = Math.PI
+
+        //this.pShoulderR.rotation.z = Math.PI/2
+        this.pShoulderL.rotation.z = -Math.PI/2
+
+        this.pElbowL = this.pShoulderL.children[0].children[2]
+
+        this.pWristL = this.pElbowL.children[2]
+        
+        this.mainPivot.add(this.pShoulderL) // mainPivot gains control of legs 
+
 
         /* body modeling */
         var gBodyLower = new THREE.BoxGeometry(unit*10, unit*4, unit*5)
@@ -213,8 +225,8 @@ class Castaway  {
 
          
         //this.pAnkle.rotation.x += this.ankleDirection*Math.PI/180 
-        this.pKneeR.rotation.x += this.kneeDirection*Math.PI/180
-        this.pHipR.rotation.z += this.hipDirection*Math.PI/180
+        this.pKnee.rotation.x += this.kneeDirection*Math.PI/180
+        this.pHipR.rotation.x += this.hipDirection*Math.PI/180
 
         //this.pAnkleL.rotation.x += this.ankleDirection*Math.PI/180 
         this.pKneeL.rotation.x += this.kneeDirection*Math.PI/180 
