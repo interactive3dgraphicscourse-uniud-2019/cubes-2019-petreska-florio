@@ -34,8 +34,8 @@
 			dirLight.position.multiplyScalar( 50 );
 			scene.add( dirLight );
 			dirLight.castShadow = true;
-			dirLight.shadow.mapSize.width = 1024;
-			dirLight.shadow.mapSize.height = 1024;
+			dirLight.shadow.mapSize.width = 128;
+			dirLight.shadow.mapSize.height = 128;
 
 			/*
 			// GROUND
