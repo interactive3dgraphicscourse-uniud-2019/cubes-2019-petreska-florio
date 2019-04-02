@@ -15,6 +15,7 @@
 			height: 100%;
 		}
 	
+	
 	</style>
 		<script src="lib/three.min.js"></script>
 		<script src="lib/stats.min.js"></script>
@@ -40,18 +41,172 @@
 			renderer.shadowMap.enabled = true;
 			document.body.appendChild( renderer.domElement );
 			
-			camera.position.set(2,2,2);
+			camera.position.set(2,2,3);
 			camera.lookAt( new THREE.Vector3(0,0,0));
 			
-			var geometry = new THREE.BoxGeometry(1,1,1);
-			var texture = THREE.ImageUtils.loadTexture('textures/11635.jpg');
-			var material = new THREE.MeshPhongMaterial( { map: texture } );
+			//beach ground n.1
+			var geometry = new THREE.BoxGeometry(2.6,0.2,2.6);
+			var texture = THREE.ImageUtils.loadTexture('textures/sand01.jpg');
+			var material = new THREE.MeshLambertMaterial( { map: texture } );
 			var cube = new THREE.Mesh( geometry, material );
 			cube.castShadow = true;
 			cube.receiveShadow = true;
-			
+			cube.position.set(0, 0.05, 0)
+
 			scene.add( cube );
 
+			//beach ground n.2
+			var geometry1 = new THREE.BoxGeometry(1.6,0.2,1.8);
+			var texture1 = THREE.ImageUtils.loadTexture('textures/sand01.jpg');
+			var material1 = new THREE.MeshLambertMaterial( { map: texture1 } );
+			var cube1 = new THREE.Mesh( geometry1, material1 );
+			cube1.position.set(-0.3, 0.15, 0)
+
+			cube1.castShadow = true;
+			cube1.receiveShadow = true;
+			
+			scene.add( cube1 );
+
+			//beach ground n.3
+			var geometry2 = new THREE.BoxGeometry(1,0.3,1);
+			var texture2 = THREE.ImageUtils.loadTexture('textures/sand01.jpg');
+			var material2 = new THREE.MeshLambertMaterial( { map: texture2 } );
+			var cube2 = new THREE.Mesh( geometry2, material2 );
+			cube2.position.set(-0.5, 0.2, 0)
+
+			cube2.castShadow = true;
+			cube2.receiveShadow = true;
+			
+			scene.add( cube2 );
+			
+			//sea cube
+			var geometry3 = new THREE.BoxGeometry(4.1,0.1,4.1);
+			var texture3 = THREE.ImageUtils.loadTexture('textures/sea01.jpg');
+			var material3 = new THREE.MeshLambertMaterial( { 
+				map: texture3,
+			    //premultipliedAlpha: true,
+				transparent: true, opacity: 0.4} );
+			var cube3 = new THREE.Mesh( geometry3, material3 );
+			cube3.castShadow = true;
+			cube3.receiveShadow = true;
+			cube3.position.set(0, 0.01, 0)
+
+			scene.add( cube3 );
+			
+			//beach ground same as sea cube
+			var geometry5 = new THREE.BoxGeometry(4,0.1,4);
+			var texture5 = THREE.ImageUtils.loadTexture('textures/sand01.jpg');
+			var material5 = new THREE.MeshLambertMaterial( { map: texture5 } );
+			var cube5 = new THREE.Mesh( geometry5, material5 );
+			cube5.castShadow = true;
+			cube5.receiveShadow = true;
+			cube5.position.set(0, 0, 0)
+
+			scene.add( cube5 ); 
+
+			//palm tree box 0
+			var geometry4 = new THREE.BoxGeometry(0.2,0.2,0.2);
+			var material4 = new THREE.MeshLambertMaterial( { color: 0x65341f } );
+			var cube4 = new THREE.Mesh( geometry4, material4 );
+			cube4.position.set(-0.5, 0.45,0)
+
+			cube4.castShadow = true;
+			cube4.receiveShadow = true;
+			
+			scene.add( cube4 );
+			//palm tree box 1
+			var palmCube1 = cube4.clone();
+			palmCube1.position.set(-0.42, 0.6, 0); 
+			scene.add( palmCube1 ); 
+			//palm tree box 2
+			var palmCube2 = cube4.clone();
+			palmCube2.position.set(-0.3, 0.8, 0); 
+			scene.add( palmCube2 );
+			//palm tree box 3
+			var palmCube3 = cube4.clone();
+			palmCube3.position.set(-0.3, 1, 0); 
+			scene.add( palmCube3 );
+			//palm tree box 4
+			var palmCube4 = cube4.clone();
+			palmCube4.position.set(-0.2, 1.2, 0); 
+			scene.add( palmCube4 );
+			//palm tree box 5
+			var palmCube5 = cube4.clone();
+			palmCube5.position.set(-0.1, 1.4, 0); 
+			scene.add( palmCube5 );
+
+			//palm big leaf (bl)
+			var bl_geo = new THREE.BoxGeometry(0.7,0.2,0.6);
+			var bl_mat = new THREE.MeshLambertMaterial( { color: 0x2faf18 } );
+			var bigLeaf = new THREE.Mesh( bl_geo, bl_mat );
+			bigLeaf.position.set(0, 1.6, 0)
+
+			bigLeaf.castShadow = true;
+			bigLeaf.receiveShadow = true;
+			
+			scene.add( bigLeaf );
+
+			//palm medium leaf (ml)
+			var ml_geo = new THREE.BoxGeometry(0.4,0.2,0.4);
+			var ml_mat = new THREE.MeshLambertMaterial( { color: 0x2faf18 } );
+			var mediumLeaf = new THREE.Mesh( ml_geo, ml_mat );
+			mediumLeaf.position.set(0, 1.7, 0)
+
+			mediumLeaf.castShadow = true;
+			mediumLeaf.receiveShadow = true;
+			
+			scene.add( mediumLeaf ); 
+
+			//palm leaf cube 
+			var geo = new THREE.BoxGeometry(0.2,0.2,0.2);
+			var mat = new THREE.MeshLambertMaterial( { color: 0x2faf18 } ); //09f711
+			var leafCube = new THREE.Mesh( geo, mat );
+			leafCube.position.set(0.4, 1.5, 0)
+
+			leafCube.castShadow = true;
+			leafCube.receiveShadow = true;
+			
+			scene.add( leafCube );
+
+			//palm leaf cube 1
+			var leafCube1 = leafCube.clone();
+			leafCube1.position.set(0.5, 1.3, 0); 
+			scene.add( leafCube1 );
+			//palm leaf cube 2
+			var leafCube2 = leafCube.clone();
+			leafCube2.position.set(-0.6, 1.3, 0); 
+			scene.add( leafCube2 );
+			//palm leaf cube 3
+			var leafCube3 = leafCube.clone();
+			leafCube3.position.set(-0.4, 1.45, 0); 
+			scene.add( leafCube3 );
+			//palm leaf cube 4
+			var leafCube4 = leafCube.clone();
+			leafCube4.position.set(0.1, 1.45, -0.4); 
+			scene.add( leafCube4 );
+			//palm leaf cube 5
+			var leafCube5 = leafCube.clone();
+			leafCube5.position.set(0.1, 1.3, -0.55); 
+			scene.add( leafCube5 );
+			//palm leaf cube 6 (top)
+			var leafCube6 = leafCube.clone();
+			leafCube6.position.set(0, 1.8, 0); 
+			scene.add( leafCube6 );
+			//palm leaf cube 7
+			var leafCube7 = leafCube.clone();
+			leafCube7.position.set(0, 1.3, 0.55); 
+			scene.add( leafCube7 );
+			//palm leaf cube 8
+			var leafCube8 = leafCube.clone();
+			leafCube8.position.set(0, 1.5, 0.35); 
+			scene.add( leafCube8 );
+			//palm leaf cube 9
+			var leafCube9 = leafCube.clone();
+			leafCube9.position.set(0.65, 1.15, 0); 
+			scene.add( leafCube9 );
+			
+
+				
 			hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
 			hemiLight.color.setHSL( 0.6, 1, 0.6 );
 			hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
@@ -70,7 +225,7 @@
 
 			// GROUND
 			var groundGeo = new THREE.PlaneBufferGeometry( 10000, 10000 );
-			var groundMat = new THREE.MeshPhongMaterial( { color: 0xffffff, specular: 0x050505 } );
+			var groundMat = new THREE.MeshLambertMaterial( { color: 0xffffff, specular: 0x050505 } );
 			groundMat.color.setHSL( 0.095, 1, 0.75 );
 			var ground = new THREE.Mesh( groundGeo, groundMat );
 			ground.position.y = -0.5;
@@ -91,6 +246,8 @@
 			
 			
 		}
+
+		
 		
 		function Update() {
 			requestAnimationFrame( Update );
