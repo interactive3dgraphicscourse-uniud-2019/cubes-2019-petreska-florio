@@ -5,7 +5,13 @@ class Castaway  {
      * @param {THREE.Scene} scene 
      */
     constructor(scene) {
-        this.walking = false
+        this.NOWAVE = 0
+        this.ONEHAND = 1
+        this.TWOHANDS = 2
+        this.rad = Math.PI/180 
+        this.walking = true
+        this.isWaving = this.NOWAVE
+        this.currentSteps = 0
         this.ankleDirection = -1 //rendering option
         this.kneeDirection = 1 //rendering option
         this.hipDirection = -1 //rendering option
@@ -111,15 +117,15 @@ class Castaway  {
         this.pShoulderR = new THREE.Object3D() // shoulder pivot - moving lower arm 
         arm.add(this.pElbowR)   // lower arm is part of arm 
 
-        arm.position.y = unit*2.5
+        arm.position.y = unit*1
         arm.position.x = unit*-1
 
         this.pShoulderR.add(arm) // arm is child of shoulder pivot (move shoulder -> move elbow -> move wrist)
 
 
         /* add arm to body */
-        this.pShoulderR.position.y = unit*21
-        this.pShoulderR.position.x = unit*-4
+        this.pShoulderR.position.y = unit*25
+        this.pShoulderR.position.x = unit*-6
         this.pShoulderR.position.z = unit*-2.5
 
         this.mainPivot.add(this.pShoulderR)
@@ -127,13 +133,16 @@ class Castaway  {
         /* duplicate arm */
         this.pShoulderL = this.pShoulderR.clone()
 
-        this.pShoulderL.position.x = unit*4 // positioning arm mirrored on x axis
+        this.pShoulderL.position.x = unit*6 // positioning arm mirrored on x axis
         this.pShoulderL.children[0].rotation.z = Math.PI
 
-        //this.pShoulderR.rotation.z = Math.PI/2
+        this.pShoulderL.position.y = unit*23
+
+        this.pShoulderR.rotation.z = Math.PI/2
         this.pShoulderL.rotation.z = -Math.PI/2
 
         this.pElbowL = this.pShoulderL.children[0].children[2]
+
 
         this.pWristL = this.pElbowL.children[2]
         
@@ -150,6 +159,7 @@ class Castaway  {
         var hairTop = new THREE.Mesh(new THREE.BoxGeometry(unit*4, unit*1, unit*2), this.hairMaterial)
         var earR = new THREE.Mesh(new THREE.BoxGeometry(unit*1, unit*2, unit*1), this.bodyMaterial)
         var nose = new THREE.Mesh(new THREE.BoxGeometry(unit*1, unit*1, unit*1), this.bodyMaterial)
+        
 
         skull.position.y = unit*2
         skull.position.z = unit*1
@@ -175,11 +185,11 @@ class Castaway  {
         this.head.add(earL)
         this.head.add(nose)
 
-        this.head.position.y = unit*26
+        this.head.position.y = unit*29
         this.head.position.z = unit*-2
         
-        neck.position.y = unit*25
-        neck.position.z = unit*-2
+        neck.position.y = unit*28
+        neck.position.z = unit*-1
 
         this.mainPivot.add(this.head)
         this.mainPivot.add(neck)
@@ -192,15 +202,20 @@ class Castaway  {
         var bodyUpper = new THREE.Mesh(gBodyUpper, this.bodyMaterial)
         var bodyLower = new THREE.Mesh(gBodyLower, this.pantsMaterial)
 
+        bodyUpper.castShadow = true;
+        bodyUpper.receiveShadow = true;
+        bodyLower.castShadow = true;
+        bodyLower.receiveShadow = true;
+
         var neckBase = new THREE.Mesh(new THREE.BoxGeometry(unit*10, unit*2, unit*2), this.bodyMaterial)
         
-        neckBase.position.y = unit*23
+        neckBase.position.y = unit*26
         neckBase.position.z = unit*-1.5
 
-        bodyLower.position.y = unit*15
+        bodyLower.position.y = unit*18
         bodyLower.position.z = unit*-1.5
         
-        bodyUpper.position.y = unit*20
+        bodyUpper.position.y = unit*23
         bodyUpper.position.z = unit*-1.5
 
         this.mainPivot.add(bodyLower)
@@ -209,6 +224,7 @@ class Castaway  {
 
         this.mainPivot.position.y = unit*10
         this.mainPivot.position.x = unit*40
+        this.mainPivot.position.z = unit*-10
 
         scene.add(this.mainPivot)
 
@@ -237,6 +253,11 @@ class Castaway  {
         var bone = new THREE.Mesh(gBone, bMaterial) // create meshes
         var joint = new THREE.Mesh(gjoint, jMaterial)
 
+        bone.castShadow = true;
+        bone.receiveShadow = true;
+        joint.castShadow = true;
+        joint.receiveShadow = true;
+
         pJoint.add(bone) // ad meshes to pivot
         pJoint.add(joint)
 
@@ -253,40 +274,54 @@ class Castaway  {
     
     /* @TODO more natural animation */ 
     walkAnimation() {
-        if(this.pHipR.rotation.x < -30*Math.PI/180) {
+
+        if(this.pHipR.rotation.x < -30*this.rad) {
+            this.currentSteps += .5
             this.hipDirection = 1
         } 
-
-
-        if(this.pHipR.rotation.x > 30*Math.PI/180) {
+        if(this.pHipR.rotation.x > 30*this.rad) {
+            this.currentSteps += .5
             this.hipDirection = -1
         } 
-
         if(this.pKnee.rotation.x < 0) {
             this.kneeDirection = 1
         } 
-        if(this.pKnee.rotation.x > 20*Math.PI/180) {
+        if(this.pKnee.rotation.x > 20*this.rad) {
             this.kneeDirection = -1
         }  
-        
-        /* if(this.pAnkle.rotation.x  < -25*Math.PI/180) {
+        if(this.pAnkle.rotation.x  < -25*this.rad) {
             this.ankleDirection = 1
         } 
-
-
-        if(this.pAnkle.rotation.x > 40*Math.PI/180) {
+        if(this.pAnkle.rotation.x > 40*this.rad) {
             this.ankleDirection = -1
-        } */
-
+        }
+        
          
-        //this.pAnkle.rotation.x += this.ankleDirection*Math.PI/180 
-        this.pKnee.rotation.x += this.kneeDirection*Math.PI/180
-        this.pHipR.rotation.x += this.hipDirection*Math.PI/180
+        //this.pAnkle.rotation.x += this.ankleDirection*this.rad 
+        this.pKnee.rotation.x += 2*this.kneeDirection*this.rad
+        this.pHipR.rotation.x += 2*this.hipDirection*this.rad
+        this.pElbowL.rotation.y += 2*this.kneeDirection*this.rad
+        this.pShoulderL.rotation.x += 2*this.hipDirection*this.rad
 
-        //this.pAnkleL.rotation.x += this.ankleDirection*Math.PI/180 
-        this.pKneeL.rotation.x += this.kneeDirection*Math.PI/180 
-        this.pHipL.rotation.x += this.hipDirection*-1*Math.PI/180
+        //this.pAnkleL.rotation.x += this.ankleDirection*this.rad 
+        this.pKneeL.rotation.x += 2*this.kneeDirection*this.rad 
+        this.pHipL.rotation.x += 2*this.hipDirection*-1*this.rad
+        this.pElbowR.rotation.y += 2*this.kneeDirection*this.rad
+        this.pShoulderR.rotation.x += 2*this.hipDirection*-1*this.rad
 
+    }
+
+    waveAnimation(hands) {
+        if(this.pShoulderR.rotation.z > -60*this.rad) {
+            this.pShoulderR.rotation.z -= 1*this.rad
+            this.pShoulderR.rotation.x -= this.rad*.15
+            this.pElbowR.rotation.x -= this.rad*.7            
+        } else {
+            if(this.pElbowR.rotation.z < 70*this.rad) {
+                this.pElbowR.rotation.z += this.rad
+                this.pElbowR.rotation.x -= this.rad  
+            }
+        }            
     }
 
     /**
@@ -295,12 +330,23 @@ class Castaway  {
     update() {
        if(this.walking) {
             this.walkAnimation()
-            this.mainPivot.position.z+=.01
+            this.mainPivot.position.z+= 0.025
         }
-        if(this.head.rotation.x > -45*Math.PI/180 ) {
-            this.head.rotation.x += -1*Math.PI/180 
+        if(this.isWaving !== this.NOWAVE) {
+            this.waveAnimation(this.isWaving)
         }
 
+        if(this.head.rotation.x > -45*this.rad ) {
+            this.head.rotation.x += -1*this.rad 
+        }
+
+
+        if(this.currentSteps > .5){
+            if(this.pHipR.rotation.x < .01 && this.pHipR.rotation.x > -.01) {
+                this.walking = false
+                this.isWaving = this.ONEHAND
+            }
+        }
         
     }
 }
