@@ -71,23 +71,23 @@ class PalmTree  {
 
 		//palm leaf cube 1
 		var leafCube1 = leafCube.clone();
-		leafCube1.position.set(0.5, 1.3, 0); 
+		leafCube1.position.set(0.55, 1.45, 0); 
 		pivot.add( leafCube1 );
 		//palm leaf cube 2
 		var leafCube2 = leafCube.clone();
-		leafCube2.position.set(-0.6, 1.3, 0); 
+		leafCube2.position.set(-0.6, 1.5, 0); 
 		pivot.add( leafCube2 );
 		//palm leaf cube 3
 		var leafCube3 = leafCube.clone();
-		leafCube3.position.set(-0.4, 1.45, 0); 
+		leafCube3.position.set(-0.4, 1.55, 0); 
 		pivot.add( leafCube3 );
 		//palm leaf cube 4
 		var leafCube4 = leafCube.clone();
-		leafCube4.position.set(0.1, 1.45, -0.4); 
+		leafCube4.position.set(0.1, 1.55, -0.4); 
 		pivot.add( leafCube4 );
 		//palm leaf cube 5
 		var leafCube5 = leafCube.clone();
-		leafCube5.position.set(0.1, 1.3, -0.55); 
+		leafCube5.position.set(0.1, 1.5, -0.55); 
 		pivot.add( leafCube5 );
 		//palm leaf cube 6 (top)
 		var leafCube6 = leafCube.clone();
@@ -95,16 +95,20 @@ class PalmTree  {
 		pivot.add( leafCube6 );
 		//palm leaf cube 7
 		var leafCube7 = leafCube.clone();
-		leafCube7.position.set(0, 1.3, 0.55); 
+		leafCube7.position.set(0, 1.53, 0.55); 
 		pivot.add( leafCube7 );
 		//palm leaf cube 8
 		var leafCube8 = leafCube.clone();
-		leafCube8.position.set(0, 1.5, 0.35); 
+		leafCube8.position.set(0, 1.58, 0.35); 
 		pivot.add( leafCube8 );
 		//palm leaf cube 9
 		var leafCube9 = leafCube.clone();
-		leafCube9.position.set(0.65, 1.15, 0); 
+		leafCube9.position.set(0.65, 1.35, 0); 
 		pivot.add( leafCube9 );
+		//palm leaf cube 10
+		var leafCube10 = leafCube.clone();
+		leafCube10.position.set(0, 1.45, 0.65); 
+		pivot.add( leafCube10 );
 		
 
 		scene.add(pivot)

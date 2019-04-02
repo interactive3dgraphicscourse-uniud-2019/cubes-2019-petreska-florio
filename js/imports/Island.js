@@ -7,9 +7,12 @@ class Island  {
         var pivot = new THREE.Object3D()
 
         //beach ground n.1
-        var geometry = new THREE.BoxGeometry(2.6,0.2,2.6);
+        var geometry = new THREE.BoxGeometry(3,0.2,3);
         var texture = THREE.ImageUtils.loadTexture('textures/sand01.jpg');
         var material = new THREE.MeshLambertMaterial( { map: texture } );
+        texture.repeat.set(4,4);
+        texture.wrapS =THREE.RepeatWraping;
+        texture.wrapT = THREE.RepeatWraping;
         var cube = new THREE.Mesh( geometry, material );
         cube.castShadow = true;
         cube.receiveShadow = true;
@@ -21,6 +24,9 @@ class Island  {
         var geometry1 = new THREE.BoxGeometry(1.6,0.2,1.8);
         var texture1 = THREE.ImageUtils.loadTexture('textures/sand01.jpg');
         var material1 = new THREE.MeshLambertMaterial( { map: texture1 } );
+        texture1.repeat.set(2,2);
+        texture1.wrapS =THREE.RepeatWraping;
+        texture1.wrapT = THREE.RepeatWraping;
         var cube1 = new THREE.Mesh( geometry1, material1 );
         cube1.position.set(-0.3, 0.15, 0)
 
@@ -32,6 +38,9 @@ class Island  {
         //beach ground n.3
         var geometry2 = new THREE.BoxGeometry(1,0.3,1);
         var texture2 = THREE.ImageUtils.loadTexture('textures/sand01.jpg');
+        texture2.repeat.set(1,1);
+        texture2.wrapS =THREE.RepeatWraping;
+        texture2.wrapT = THREE.RepeatWraping;
         var material2 = new THREE.MeshLambertMaterial( { map: texture2 } );
         var cube2 = new THREE.Mesh( geometry2, material2 );
         cube2.position.set(-0.5, 0.2, 0)
@@ -42,8 +51,11 @@ class Island  {
         pivot.add( cube2 );
         
         //sea cube
-        var geometry3 = new THREE.BoxGeometry(4.1,0.1,4.1);
+        var geometry3 = new THREE.BoxGeometry(30.1,0.1,30.1);
         var texture3 = THREE.ImageUtils.loadTexture('textures/sea01.jpg');
+        texture3.repeat.set(10,10);
+        texture3.wrapS =THREE.RepeatWraping;
+        texture3.wrapT = THREE.RepeatWraping;
         var material3 = new THREE.MeshLambertMaterial( { 
             map: texture3,
             //premultipliedAlpha: true,
@@ -56,9 +68,12 @@ class Island  {
         pivot.add( cube3 );
         
         //beach ground same as sea cube
-        var geometry5 = new THREE.BoxGeometry(4,0.1,4);
+        var geometry5 = new THREE.BoxGeometry(30,0.1,30);
         var texture5 = THREE.ImageUtils.loadTexture('textures/sand01.jpg');
         var material5 = new THREE.MeshLambertMaterial( { map: texture5 } );
+        texture5.repeat.set(10,10);
+        texture5.wrapS =THREE.RepeatWraping;
+        texture5.wrapT = THREE.RepeatWraping;
         var cube5 = new THREE.Mesh( geometry5, material5 );
         cube5.castShadow = true;
         cube5.receiveShadow = true;
