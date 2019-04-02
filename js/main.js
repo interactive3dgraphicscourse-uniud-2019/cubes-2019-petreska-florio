@@ -17,15 +17,10 @@
 			
 			camera.position.set(2,2,2);
 			camera.lookAt( new THREE.Vector3(0,0,0));
-			
-			var geometry = new THREE.BoxGeometry(1,1,1);
-			var texture = THREE.ImageUtils.loadTexture('textures/11635.jpg');
-			var material = new THREE.MeshPhongMaterial( { map: texture } );
-			var cube = new THREE.Mesh( geometry, material );
-			cube.castShadow = true;
-			cube.receiveShadow = true;
-			
-			//scene.add( cube );
+
+			var island = new Island(scene)
+
+			var palmtree = new PalmTree(scene)
 
 			hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
 			hemiLight.color.setHSL( 0.6, 1, 0.6 );
@@ -42,17 +37,17 @@
 			dirLight.shadow.mapSize.width = 1024;
 			dirLight.shadow.mapSize.height = 1024;
 
-
+			/*
 			// GROUND
 			var groundGeo = new THREE.PlaneBufferGeometry( 10000, 10000 );
 			var groundMat = new THREE.MeshPhongMaterial( { color: 0xffffff, specular: 0x050505 } );
 			groundMat.color.setHSL( 0.095, 1, 0.75 );
 			var ground = new THREE.Mesh( groundGeo, groundMat );
-			ground.position.y = -0.5;
+			//ground.position.y = -0.5;
 			ground.rotation.x = -Math.PI/2;
 			scene.add( ground );
 			ground.receiveShadow = true;
-			
+			*/
 			stats = new Stats();
 			stats.domElement.style.position = 'absolute';
 			stats.domElement.style.top = '0px';

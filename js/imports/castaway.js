@@ -10,7 +10,7 @@ class Castaway  {
         this.kneeDirection = 1 //rendering option
         this.hipDirection = -1 //rendering option
         
-        var unit = .1 // dimensions of one basic cube
+        var unit = .02 // dimensions of one basic cube
         this.bodyMaterial = new THREE.MeshLambertMaterial({color: 0xc68642}) // material for the skin
         this.pantsMaterial = new THREE.MeshLambertMaterial({color: 0x990000}) // material for pants
         this.hairMaterial = new THREE.MeshLambertMaterial({color: 0x000000}) // material for hair
@@ -56,7 +56,7 @@ class Castaway  {
         this.pHipR = new THREE.Object3D() // leg pivot - used to move hip
         this.pHipR.add(leg) // entire leg movement depends on this new pivot
 
-        this.pHipR.position.y = unit*14 // positioning leg relative to terrain (sole touches the floor)
+        this.pHipR.position.y = unit*17 // positioning leg relative to terrain (sole touches the floor)
         this.pHipR.position.x = unit*-3
 
 
@@ -68,7 +68,7 @@ class Castaway  {
         this.pKneeL = this.pHipL.children[0].children[2]
 
         this.pAnkleL = this.pKneeL.children[2]
-        
+
         this.mainPivot.add(this.pHipR) // mainPivot gains control of legs 
         this.mainPivot.add(this.pHipL)
 
@@ -207,6 +207,8 @@ class Castaway  {
         this.mainPivot.add(bodyUpper)
         this.mainPivot.add(neckBase)
 
+        this.mainPivot.position.y = unit*10
+        this.mainPivot.position.x = unit*40
 
         scene.add(this.mainPivot)
 
