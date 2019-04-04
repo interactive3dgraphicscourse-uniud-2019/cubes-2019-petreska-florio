@@ -14,11 +14,11 @@ class Island  {
         texture.wrapS =THREE.RepeatWraping;
         texture.wrapT = THREE.RepeatWraping;
         var cube = new THREE.Mesh( geometry, material );
-        cube.castShadow = true;
         cube.receiveShadow = true;
         cube.position.set(0, 0.05, 0)
 
         pivot.add( cube );
+        
 
         //beach ground n.2
         var geometry1 = new THREE.BoxGeometry(1.6,0.2,1.8);
@@ -51,7 +51,7 @@ class Island  {
         pivot.add( cube2 );
         
         //sea cube
-        var geometry3 = new THREE.BoxGeometry(30.1,0.1,30.1);
+        var geometry3 = new THREE.BoxGeometry(30.1,0.2,30.1);
         var texture3 = THREE.ImageUtils.loadTexture('textures/sea01.jpg');
         texture3.repeat.set(10,10);
         texture3.wrapS =THREE.RepeatWraping;
@@ -78,8 +78,114 @@ class Island  {
         cube5.castShadow = true;
         cube5.receiveShadow = true;
         cube5.position.set(0, 0, 0)
+        
 
         pivot.add( cube5 );
+
+        //adding smaller parts on every ground level
+
+        //small parts beach ground n.1 
+        //
+        var smallPartGroundGeo1 = new THREE.BoxGeometry(2.6,0.2,0.1);
+        var smallPartGroundText1= THREE.ImageUtils.loadTexture('textures/sand01.jpg');
+        var smallPartGroundMat1 = new THREE.MeshLambertMaterial( { map: smallPartGroundText1 } );
+        smallPartGroundText1.repeat.set(5,1);
+        smallPartGroundText1.wrapS =THREE.RepeatWraping;
+        smallPartGroundText1.wrapT = THREE.RepeatWraping;
+        var smallPartGround1 = new THREE.Mesh( smallPartGroundGeo1, smallPartGroundMat1 );
+        smallPartGround1.castShadow = true;
+        //smallPartGround1.receiveShadow = true;
+        smallPartGround1.position.set(0.04, 0.05, 1.55)
+        smallPartGround1.castShadow = true;
+        smallPartGround1.receiveShadow = true;
+
+        pivot.add( smallPartGround1 );
+
+        //duplicating the small ground parts on ground n.1
+        var smallPartGround2 = smallPartGround1.clone();
+		smallPartGround2.position.set(0.04, 0.05, -1.55); 
+        pivot.add( smallPartGround2 );
+        smallPartGround2.receiveShadow = true;
+
+        var smallPartGround3 = smallPartGround1.clone();
+        smallPartGround3.position.set(1.55, 0.05, 0.05); 
+        smallPartGround3.rotation.y = Math.PI/2;
+        smallPartGround3.receiveShadow = true;
+        pivot.add( smallPartGround3 );
+    
+        var smallPartGround4 = smallPartGround1.clone();
+        smallPartGround4.position.set(-1.55, 0.05, 0.05); 
+        smallPartGround4.rotation.y = Math.PI/2;
+        smallPartGround4.receiveShadow = true;
+        pivot.add( smallPartGround4 );
+
+         //small parts beach ground n.2 
+         var smallPartGroundGeo5 = new THREE.BoxGeometry(1.3,0.2,0.1);
+         var smallPartGroundText5= THREE.ImageUtils.loadTexture('textures/sand01.jpg');
+         var smallPartGroundMat5 = new THREE.MeshLambertMaterial( { map: smallPartGroundText5 } );
+         smallPartGroundText1.repeat.set(2,0.5);
+         smallPartGroundText1.wrapS =THREE.RepeatWraping;
+         smallPartGroundText1.wrapT = THREE.RepeatWraping;
+         var smallPartGround5 = new THREE.Mesh( smallPartGroundGeo5, smallPartGroundMat5 );
+         smallPartGround1.receiveShadow = true;
+         smallPartGround5.position.set(-0.3, 0.15, 0.95)
+         smallPartGround5.receiveShadow = true;
+ 
+         pivot.add( smallPartGround5 );
+
+         //duplicating the small ground parts on ground n.2
+        var smallPartGround6 = smallPartGround5.clone();
+        smallPartGround6.position.set(-0.3, 0.15, -0.95); 
+        smallPartGround6.receiveShadow = true;
+        pivot.add( smallPartGround6 );
+
+        var smallPartGround7 = smallPartGround5.clone();
+        smallPartGround7.position.set(0.55, 0.15, 0.05); 
+        smallPartGround7.rotation.y = Math.PI/2;
+        smallPartGround7.receiveShadow = true;
+        pivot.add( smallPartGround7 );
+        
+        var smallPartGround8 = smallPartGround5.clone();
+        smallPartGround8.position.set(-1.15, 0.15, 0.05); 
+        smallPartGround8.rotation.y = Math.PI/2;
+        smallPartGround8.receiveShadow = true;
+        pivot.add( smallPartGround8 );
+
+        //small parts beach ground n.3
+        var smallPartGroundGeo9 = new THREE.BoxGeometry(0.7,0.2,0.1);
+        var smallPartGroundText9= THREE.ImageUtils.loadTexture('textures/sand01.jpg');
+        var smallPartGroundMat9 = new THREE.MeshLambertMaterial( { map: smallPartGroundText9 } );
+        smallPartGroundText1.repeat.set(2,0.5);
+        smallPartGroundText1.wrapS =THREE.RepeatWraping;
+        smallPartGroundText1.wrapT = THREE.RepeatWraping;
+        var smallPartGround9 = new THREE.Mesh( smallPartGroundGeo9, smallPartGroundMat9 );
+        smallPartGround9.castShadow = true;
+        //smallPartGround1.receiveShadow = true;
+        smallPartGround9.position.set(-0.5, 0.25, 0.55)
+        smallPartGround9.receiveShadow = true;
+
+        pivot.add( smallPartGround9 );
+
+        //duplicating the small ground parts on ground n.3
+       var smallPartGround10 = smallPartGround9.clone();
+       smallPartGround10.position.set(-0.5, 0.25, -0.55); 
+       smallPartGround10.receiveShadow = true;
+       pivot.add( smallPartGround10 );
+
+       var smallPartGround11 = smallPartGround9.clone();
+       smallPartGround11.position.set(0.05, 0.25, 0.05); 
+       smallPartGround11.rotation.y = Math.PI/2;
+       smallPartGround11.receiveShadow = true;
+       pivot.add( smallPartGround11 );
+       
+       var smallPartGround12 = smallPartGround9.clone();
+       smallPartGround12.position.set(-1.05, 0.25, 0.05); 
+       smallPartGround12.rotation.y = Math.PI/2;
+       smallPartGround12.receiveShadow = true;
+       pivot.add( smallPartGround12 );
+
+       
+
 
         scene.add(pivot)
     }

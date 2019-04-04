@@ -1,6 +1,6 @@
 class PalmTree  {
     /**
-     * Create an island made of sand in the middle of a sea
+     * Create a palm tree 
      * @param {THREE.Scene} scene 
      */
     constructor(scene) {
