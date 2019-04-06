@@ -99,8 +99,7 @@ Cambiamento dei materiali del naufrago per interagire con le luci
 Raffinatura e pulizia del codice.
 Abbiamo creato due classi diversi, una per l'isola e l'altra per la palma.
 
-Migliorata la palma aggiungendo i 
-blocchi mancanti. Abbiamo fatto cambiamenti sull'ombra e abbiamo reso il mare più grande per dare meglio l'idea che si tratta di un'isola deserta in mezzo al mare.
+Migliorata la palma aggiungendo i blocchi mancanti. Abbiamo fatto cambiamenti sull'ombra e abbiamo reso il mare più grande per dare meglio l'idea che si tratta di un'isola deserta in mezzo al mare.
 
 Dopodichè abbiamo unito la figura del naufrago con la scena dell'isola e la palma. Con questa modifica siamo state costrette a cambiare le dimensioni dal naufrago e dall'isola per adattarsi insieme.
 
@@ -112,10 +111,25 @@ Dopodichè abbiamo unito la figura del naufrago con la scena dell'isola e la pal
 Ulteriore implementazione del terreno, creazione di nuovi cubi su ogni livello dell'isola, per dare l'aspetto dell'isola simile al nostro primo design in MagicaVoxel.
 ![](images/island1.png)
 
+
+Progetto leggermente in stallo per 3 giorni causa 1/2 del team abbattuto dall'influenza.
+
 ## 06.04.2019
 
-Implementazione del fuoco ed i sassi nel mare.
+Implementazione del fuoco sull'isola ed i sassi nel mare.
+
+Aggiunta animazione del naufrago che agita le braccia per chiedere aiuto. Qualche difficoltà con le rotazioni delle ossa, ma la precedente progettazione dei pivot ha aiutato molto nel lavorare con ogni articolazione.
+
+
 ![](images/fire&searocks.png)
+
+
+Conclusa l'animazione delle braccia è stato definito un piccolo loop nel quale il naufrago gira intorno all'isola e ad ogni angolo si sbraccia per chiedere aiuto, utilizzando le callback functions di JavaScript.
+
+Infine è stata utilizzata la classe delle rocce marine per crearne 4 in 4 posti diversi.
+
+Decisione di concludere qui la parte da consegnare e dedicarsi a post processing del video di presentazione.
+
 
 
 
