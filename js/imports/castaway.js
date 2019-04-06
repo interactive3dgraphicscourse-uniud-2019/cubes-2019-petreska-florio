@@ -29,6 +29,8 @@ class Castaway  {
         this.handDirectionZ = 0
         this.handDirectionY = 0
         this.startedWaving = 0
+        this.prevFrameTime = 0
+        this.currentFrameTime = 0
         
         var unit = .02 // dimensions of one basic cube
         this.bodyMaterial = new THREE.MeshLambertMaterial({color: 0xc68642}) // material for the skin
@@ -439,37 +441,43 @@ class Castaway  {
      * update position of the castaway
      */
     update() {
-       if(this.walking) {
-            this.walkAnimation(3, () => {
-                let waving = [this.ONEHAND, this.TWOHANDS]
-                this.isWaving = this.randomElement(waving)
-                console.log(this.isWaving)
-                this.walkDirection++
-            })
-            if(this.walkDirection % 4 === 0 ) 
-                this.mainPivot.position.z+= 0.02
-            else if (this.walkDirection % 4 === 1) 
-                this.mainPivot.position.x -= 0.02
-            else if(this.walkDirection % 4 === 2) 
-                this.mainPivot.position. z -= 0.02
-            else
-                this.mainPivot.position.x += 0.02
+        this.currentFrameTime = Date.now()
+        if(this.currentFrameTime - this.prevFrameTime < 15) {
+            return
         }
-        if(this.isWaving !== this.NOWAVE) {
-            this.waveAnimation(this.isWaving, 3, () => {
-                this.isTurning = true
-            })
-        }
-        if (this.isTurning) {
-            this.turn(-90, () => {
-                this.isTurning = false
-                this.walking = true
-            })
-        }
+        if(this.walking) {
+                this.walkAnimation(3, () => {
+                    let waving = [this.ONEHAND, this.TWOHANDS]
+                    this.isWaving = this.randomElement(waving)
+                    console.log(this.isWaving)
+                    this.walkDirection++
+                })
+                if(this.walkDirection % 4 === 0 ) 
+                    this.mainPivot.position.z+= 0.02
+                else if (this.walkDirection % 4 === 1) 
+                    this.mainPivot.position.x -= 0.02
+                else if(this.walkDirection % 4 === 2) 
+                    this.mainPivot.position. z -= 0.02
+                else
+                    this.mainPivot.position.x += 0.02
+            }
+            if(this.isWaving !== this.NOWAVE) {
+                this.waveAnimation(this.isWaving, 3, () => {
+                    this.isTurning = true
+                })
+            }
+            if (this.isTurning) {
+                this.turn(-90, () => {
+                    this.isTurning = false
+                    this.walking = true
+                })
+            }
 
-        if(this.head.rotation.x > -30*this.rad ) {
-            this.head.rotation.x += -1*this.rad 
-        }
+            if(this.head.rotation.x > -30*this.rad ) {
+                this.head.rotation.x += -1*this.rad 
+            }
+
+            this.prevFrameTime = this.currentFrameTime
 
         
     }
