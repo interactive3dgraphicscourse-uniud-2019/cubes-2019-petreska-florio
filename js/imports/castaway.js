@@ -15,6 +15,11 @@ class Castaway  {
         this.ankleDirection = -1 //rendering option
         this.kneeDirection = 1 //rendering option
         this.hipDirection = -1 //rendering option
+        this.shouldDirectionX = -.45
+        this.shouldDirectionZ = -3
+        this.handDirectionX = -2
+        this.handDirectionZ = 0
+        this.handDirectionY = 0
         
         var unit = .02 // dimensions of one basic cube
         this.bodyMaterial = new THREE.MeshLambertMaterial({color: 0xc68642}) // material for the skin
@@ -117,8 +122,8 @@ class Castaway  {
         this.pShoulderR = new THREE.Object3D() // shoulder pivot - moving lower arm 
         arm.add(this.pElbowR)   // lower arm is part of arm 
 
-        arm.position.y = unit*1
-        arm.position.x = unit*-1
+        //arm.position.y = unit*1
+        //arm.position.x = unit*-1
 
         this.pShoulderR.add(arm) // arm is child of shoulder pivot (move shoulder -> move elbow -> move wrist)
 
@@ -136,7 +141,7 @@ class Castaway  {
         this.pShoulderL.position.x = unit*6 // positioning arm mirrored on x axis
         this.pShoulderL.children[0].rotation.z = Math.PI
 
-        this.pShoulderL.position.y = unit*23
+        //this.pShoulderL.position.y = unit*23
 
         this.pShoulderR.rotation.z = Math.PI/2
         this.pShoulderL.rotation.z = -Math.PI/2
@@ -144,7 +149,7 @@ class Castaway  {
         this.pElbowL = this.pShoulderL.children[0].children[2]
 
 
-        this.pWristL = this.pElbowL.children[2]
+        this.pHandL = this.pElbowL.children[2]
         
         this.mainPivot.add(this.pShoulderL) // mainPivot gains control of arms
        
@@ -312,16 +317,38 @@ class Castaway  {
     }
 
     waveAnimation(hands) {
-        if(this.pShoulderR.rotation.z > -60*this.rad) {
-            this.pShoulderR.rotation.z -= 1*this.rad
-            this.pShoulderR.rotation.x -= this.rad*.15
-            this.pElbowR.rotation.x -= this.rad*.7            
-        } else {
-            if(this.pElbowR.rotation.z < 70*this.rad) {
-                this.pElbowR.rotation.z += this.rad
-                this.pElbowR.rotation.x -= this.rad  
+
+        if(this.pShoulderR.rotation.z < -60*this.rad) {
+            console.log("hello")
+            this.shouldDirectionX = 0
+            this.shouldDirectionZ = 0
+            //this.handDirectionX = 0
+            //this.handDirectionZ = 0
+            if(this.pElbowR.rotation.z < -80*this.rad) {
+                this.handDirectionZ = 1
+                this.handDirectionY = -1
+                this.handDirectionX = -1.5
             }
-        }            
+            if(this.pElbowR.rotation.z > -10*this.rad) {
+                this.handDirectionZ = -1
+                this.handDirectionY = 1
+                this.handDirectionX = 1.5
+            }
+        }
+        
+        this.pShoulderR.rotation.z += this.shouldDirectionZ*this.rad
+        this.pShoulderR.rotation.x += this.shouldDirectionX*this.rad
+        this.pHandR.rotation.x += this.handDirectionX*this.rad
+        this.pElbowR.rotation.z += this.handDirectionZ*this.rad
+        this.pElbowR.rotation.y += this.handDirectionY*this.rad
+
+        if(hands === this.TWOHANDS) {   
+            this.pShoulderL.rotation.z -= this.shouldDirectionZ*this.rad
+            this.pShoulderL.rotation.x += this.shouldDirectionX*this.rad
+            this.pHandL.rotation.x -= this.handDirectionX*this.rad
+            this.pElbowL.rotation.z -= this.handDirectionZ*this.rad
+            this.pElbowL.rotation.y += this.handDirectionY*this.rad   
+        }
     }
 
     /**
@@ -344,7 +371,7 @@ class Castaway  {
         if(this.currentSteps > .5){
             if(this.pHipR.rotation.x < .01 && this.pHipR.rotation.x > -.01) {
                 this.walking = false
-                this.isWaving = this.ONEHAND
+                this.isWaving = this.TWOHANDS
             }
         }
         
