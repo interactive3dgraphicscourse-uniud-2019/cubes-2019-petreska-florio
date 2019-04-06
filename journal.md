@@ -109,10 +109,12 @@ Dopodichè abbiamo unito la figura del naufrago con la scena dell'isola e la pal
 ## 03.04.2019
 
 Ulteriore implementazione del terreno, creazione di nuovi cubi su ogni livello dell'isola, per dare l'aspetto dell'isola simile al nostro primo design in MagicaVoxel.
+![](images/island1.png)
 
 ## 06.04.2019
 
 Implementazione del fuoco ed i sassi nel mare.
+![](images/fire&searocks.png)
 
 
 
