@@ -18,7 +18,6 @@ class Island  {
         cube.position.set(0, 0.05, 0)
 
         pivot.add( cube );
-        
 
         //beach ground n.2
         var geometry1 = new THREE.BoxGeometry(1.6,0.2,1.8);
@@ -53,7 +52,7 @@ class Island  {
         //sea cube
         var geometry3 = new THREE.BoxGeometry(30.1,0.2,30.1);
         var texture3 = THREE.ImageUtils.loadTexture('textures/sea01.jpg');
-        texture3.repeat.set(10,10);
+        texture3.repeat.set(2,2);
         texture3.wrapS =THREE.RepeatWraping;
         texture3.wrapT = THREE.RepeatWraping;
         var material3 = new THREE.MeshLambertMaterial( { 
@@ -85,7 +84,6 @@ class Island  {
         //adding smaller parts on every ground level
 
         //small parts beach ground n.1 
-        //
         var smallPartGroundGeo1 = new THREE.BoxGeometry(2.6,0.2,0.1);
         var smallPartGroundText1= THREE.ImageUtils.loadTexture('textures/sand01.jpg');
         var smallPartGroundMat1 = new THREE.MeshLambertMaterial( { map: smallPartGroundText1 } );
@@ -155,7 +153,7 @@ class Island  {
         var smallPartGroundGeo9 = new THREE.BoxGeometry(0.7,0.2,0.1);
         var smallPartGroundText9= THREE.ImageUtils.loadTexture('textures/sand01.jpg');
         var smallPartGroundMat9 = new THREE.MeshLambertMaterial( { map: smallPartGroundText9 } );
-        smallPartGroundText1.repeat.set(2,0.5);
+        smallPartGroundText1.repeat.set(10,1);
         smallPartGroundText1.wrapS =THREE.RepeatWraping;
         smallPartGroundText1.wrapT = THREE.RepeatWraping;
         var smallPartGround9 = new THREE.Mesh( smallPartGroundGeo9, smallPartGroundMat9 );
@@ -184,9 +182,122 @@ class Island  {
        smallPartGround12.receiveShadow = true;
        pivot.add( smallPartGround12 );
 
-       
-
-
         scene.add(pivot)
+
+        //fire cubes
+        var fireGeo1 = new THREE.BoxGeometry(0.1,0.1,0.1);
+        var fireMat1 = new THREE.MeshLambertMaterial( { color: 0x180e01 } );
+        var fire1 = new THREE.Mesh( fireGeo1, fireMat1 );
+        fire1.position.set(-1, 0.2, 1.3)
+        fire1.castShadow = true;
+        fire1.receiveShadow = true;
+        pivot.add( fire1 );
+        //duplication 3 more fire cubes
+        var fire2 = fire1.clone();
+       fire2.position.set(-1.2, 0.2, 1.3); 
+       fire2.castShadow = true;
+       fire2.receiveShadow = true;
+       pivot.add( fire2 );
+
+       var fire3 = fire1.clone();
+       fire3.position.set(-1.1, 0.2, 1.2); 
+       fire3.castShadow = true;
+       fire3.receiveShadow = true;
+       pivot.add( fire3 );
+
+       var fire4 = fire1.clone();
+       fire4.position.set(-1.1, 0.2, 1.4); 
+       fire4.castShadow = true;
+       fire4.receiveShadow = true;
+       pivot.add( fire4 );
+
+       //burning fire1
+       var bfireGeo1 = new THREE.BoxGeometry(0.08,0.2,0.1);
+       var bfireMat1 = new THREE.MeshLambertMaterial( { color: 0xf8fc0d } );
+       var bfire1 = new THREE.Mesh( bfireGeo1, bfireMat1 );
+       bfire1.position.set(-1.1, 0.2, 1.3)
+       pivot.add( bfire1 );
+
+       //burning fire2
+       var bfireGeo2 = new THREE.BoxGeometry(0.1,0.25,0.1);
+       var bfireMat2 = new THREE.MeshLambertMaterial( { 
+           color: 0xf8fc0d,
+           premultipliedAlpha: true,
+           transparent: true, opacity: 0.3} );
+       var bfire2 = new THREE.Mesh( bfireGeo2, bfireMat2 );
+       bfire2.position.set(-1.1, 0.2, 1.3)
+       pivot.add( bfire2 );
+
+        
+        // sea rock1
+        var rockgeo1 = new THREE.BoxGeometry(0.2,0.38,0.1);
+        var rockmat1 = new THREE.MeshLambertMaterial( { color: 0x717a74 } );
+        var rock1 = new THREE.Mesh( rockgeo1, rockmat1 );
+        rock1.position.set(-2, 0.2, 2.5)
+        rock1.castShadow = true;
+        rock1.receiveShadow = true;
+        pivot.add( rock1 );
+        //sea rock2
+        var rock2 = rock1.clone();
+       rock2.position.set(-2.2, 0.2, 2.2); 
+       rock2.castShadow = true;
+       rock2.receiveShadow = true;
+       pivot.add( rock2 );
+       // sea rock3
+       var rockgeo3 = new THREE.BoxGeometry(0.3,0.15,0.3);
+       var rockmat3 = new THREE.MeshLambertMaterial( { color: 0x717a74 } );
+       var rock3 = new THREE.Mesh( rockgeo3, rockmat3 );
+       rock3.position.set(-2, 0.1, 2.5)
+       rock3.castShadow = true;
+       rock3.receiveShadow = true;
+       pivot.add( rock3 );
+       // sea rock4
+       var rockgeo4 = new THREE.BoxGeometry(0.1,0.1,0.1);
+       var rockmat4 = new THREE.MeshLambertMaterial( { color: 0x404142 } );
+       var rock4 = new THREE.Mesh( rockgeo4, rockmat4 );
+       rock4.position.set(-1.8, 0.1, 2.3)
+       rock4.castShadow = true;
+       rock4.receiveShadow = true;
+       pivot.add( rock4 );
+       //sea rock5
+       var rock5 = rock4.clone();
+       rock5.position.set(-1.7, 0.1, 2.4); 
+       rock5.castShadow = true;
+       rock5.receiveShadow = true;
+       pivot.add( rock5 );
+       //sea rock6
+       var rock6 = rock4.clone();
+       rock6.position.set(-2, 0.1, 2.2); 
+       rock6.castShadow = true;
+       rock6.receiveShadow = true;
+       pivot.add( rock6 );
+       //sea rock7
+       var rock7 = rock4.clone();
+       rock7.position.set(-2, 0.1, 2.3); 
+       rock7.castShadow = true;
+       rock7.receiveShadow = true;
+       pivot.add( rock7 );
+       // sea rock8
+       var rockgeo8 = new THREE.BoxGeometry(0.3,0.25,0.2);
+       var rockmat8 = new THREE.MeshLambertMaterial( { color: 0x717a79 } );
+       var rock8 = new THREE.Mesh( rockgeo8, rockmat8 );
+       rock8.position.set(-2.2, 0.1, 2.3)
+       rock8.castShadow = true;
+       rock8.receiveShadow = true;
+       pivot.add( rock8 );
+       //sea rock9
+       var rock9 = rock8.clone();
+       rock9.position.set(-2.1, 0.1, 2.6); 
+       rock9.castShadow = true;
+       rock9.receiveShadow = true;
+       pivot.add( rock9 );
+      //sea rock10
+      var rock10 = rock1.clone();
+      rock10.position.set(-2.1, 0.15, 2.4); 
+      rock10.castShadow = true;
+      rock10.receiveShadow = true;
+      pivot.add( rock10 );  
+
+       
     }
 }
