@@ -8,6 +8,8 @@ class Castaway  {
         this.NOWAVE = 0
         this.ONEHAND = 1
         this.TWOHANDS = 2
+        this.UP = 1
+        this.DOWN = -1
         this.rad = Math.PI/180 
         this.walking = true
         this.isWaving = this.NOWAVE
@@ -20,6 +22,7 @@ class Castaway  {
         this.handDirectionX = -2
         this.handDirectionZ = 0
         this.handDirectionY = 0
+        this.startedWaving = 0
         
         var unit = .02 // dimensions of one basic cube
         this.bodyMaterial = new THREE.MeshLambertMaterial({color: 0xc68642}) // material for the skin
@@ -316,8 +319,35 @@ class Castaway  {
 
     }
 
-    waveAnimation(hands) {
+    moveArms(direction, hands) {
+        if(direction === this.UP){
+            this.shouldDirectionX = -.45
+            this.shouldDirectionZ = -3
+            this.handDirectionX = -2
+        }
 
+        if(direction === this.DOWN) {
+            this.shouldDirectionX = .45
+            this.shouldDirectionZ = 3
+            this.handDirectionX = 2
+        }
+        
+        this.pShoulderR.rotation.z += this.shouldDirectionZ*this.rad
+        this.pShoulderR.rotation.x += this.shouldDirectionX*this.rad
+        this.pHandR.rotation.x += this.handDirectionX*this.rad
+
+        if(hands === this.TWOHANDS) {   
+            this.pShoulderL.rotation.z -= this.shouldDirectionZ*this.rad
+            this.pShoulderL.rotation.x += this.shouldDirectionX*this.rad
+            this.pHandL.rotation.x -= this.handDirectionX*this.rad 
+        }
+
+    }
+
+    waveAnimation(hands) {
+        if(this.pShoulderR.rotation.z > -60*this.rad) {
+            this.moveArms(this.UP, hands)
+        }
         if(this.pShoulderR.rotation.z < -60*this.rad) {
             console.log("hello")
             this.shouldDirectionX = 0
@@ -371,7 +401,17 @@ class Castaway  {
         if(this.currentSteps > .5){
             if(this.pHipR.rotation.x < .01 && this.pHipR.rotation.x > -.01) {
                 this.walking = false
-                this.isWaving = this.TWOHANDS
+                if(this.isWaving === this.NOWAVE) {
+                    this.startedWaving = new Date().getTime()
+                }
+                console.log(new Date().getTime() - this.startedWaving)
+                if(new Date().getMilliseconds() - this.startedWaving > 1000) {
+                    
+                    this.isWaving = this.TWOHANDS
+                } else {
+                    this.isWaving = this.TWOHANDS
+                }
+                
             }
         }
         
