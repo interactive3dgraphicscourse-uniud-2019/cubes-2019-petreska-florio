@@ -13,7 +13,12 @@ class Castaway  {
         this.rad = Math.PI/180 
         this.walking = true
         this.isWaving = this.NOWAVE
+        this.isTurning = false
+        this.overTurning = false
+        this.overWaving = false
         this.currentSteps = 0
+        this.lastStep = false
+        this.waveCount = 0
         this.ankleDirection = -1 //rendering option
         this.kneeDirection = 1 //rendering option
         this.hipDirection = -1 //rendering option
@@ -281,14 +286,19 @@ class Castaway  {
     }
     
     /* @TODO more natural animation */ 
-    walkAnimation() {
+    walkAnimation(steps, onEnd) {
 
         if(this.pHipR.rotation.x < -30*this.rad) {
-            this.currentSteps += .5
+            if(this.currentSteps % 2 === 0){
+                this.currentSteps += 1
+                console.log(this.currentSteps)
+            }
             this.hipDirection = 1
         } 
         if(this.pHipR.rotation.x > 30*this.rad) {
-            this.currentSteps += .5
+            if(this.currentSteps % 2 === 1 ||  this.currentSteps % 2 === -1) {
+                this.currentSteps += 1
+            }
             this.hipDirection = -1
         } 
         if(this.pKnee.rotation.x < 0) {
@@ -304,6 +314,16 @@ class Castaway  {
             this.ankleDirection = -1
         }
         
+        if(this.currentSteps/2 == steps) {
+            this.currentSteps = 0
+            this.lastStep = true
+            
+        }
+
+        if(this.lastStep && this.pHipR.rotation.x < 0.1 && this.pHipR.rotation.x >-0.1) {
+            this.walking = false
+            return onEnd()
+        }
          
         //this.pAnkle.rotation.x += this.ankleDirection*this.rad 
         this.pKnee.rotation.x += 2*this.kneeDirection*this.rad
@@ -321,15 +341,15 @@ class Castaway  {
 
     moveArms(direction, hands) {
         if(direction === this.UP){
-            this.shouldDirectionX = -.45
-            this.shouldDirectionZ = -3
-            this.handDirectionX = -2
+            this.shouldDirectionX = -.6
+            this.shouldDirectionZ = -4
+            this.handDirectionX = -3
         }
 
         if(direction === this.DOWN) {
-            this.shouldDirectionX = .45
-            this.shouldDirectionZ = 3
-            this.handDirectionX = 2
+            this.shouldDirectionX = .6
+            this.shouldDirectionZ = 4
+            this.handDirectionX = 3
         }
         
         this.pShoulderR.rotation.z += this.shouldDirectionZ*this.rad
@@ -344,41 +364,70 @@ class Castaway  {
 
     }
 
-    waveAnimation(hands) {
-        if(this.pShoulderR.rotation.z > -60*this.rad) {
-            this.moveArms(this.UP, hands)
-        }
-        if(this.pShoulderR.rotation.z < -60*this.rad) {
-            console.log("hello")
-            this.shouldDirectionX = 0
-            this.shouldDirectionZ = 0
-            //this.handDirectionX = 0
-            //this.handDirectionZ = 0
-            if(this.pElbowR.rotation.z < -80*this.rad) {
-                this.handDirectionZ = 1
-                this.handDirectionY = -1
-                this.handDirectionX = -1.5
+    waveArms(hands) {
+        if(this.pElbowR.rotation.z < -80*this.rad) {
+            if(this.waveCount % 2 === 0) {
+                this.waveCount += 1
             }
-            if(this.pElbowR.rotation.z > -10*this.rad) {
-                this.handDirectionZ = -1
-                this.handDirectionY = 1
-                this.handDirectionX = 1.5
-            }
+            this.handDirectionZ = 2
+            this.handDirectionY = -2
+            this.handDirectionX = -3
         }
-        
-        this.pShoulderR.rotation.z += this.shouldDirectionZ*this.rad
-        this.pShoulderR.rotation.x += this.shouldDirectionX*this.rad
-        this.pHandR.rotation.x += this.handDirectionX*this.rad
+        if(this.pElbowR.rotation.z > -10*this.rad) {
+            if(this.waveCount % 2 === 1 ||  this.waveCount % 2 === -1) {
+                this.waveCount += 1
+            }
+            this.handDirectionZ = -2
+            this.handDirectionY = 2
+            this.handDirectionX = 3
+        }
+
+        //this.pHandR.rotation.x += this.handDirectionX*this.rad
         this.pElbowR.rotation.z += this.handDirectionZ*this.rad
         this.pElbowR.rotation.y += this.handDirectionY*this.rad
 
         if(hands === this.TWOHANDS) {   
-            this.pShoulderL.rotation.z -= this.shouldDirectionZ*this.rad
-            this.pShoulderL.rotation.x += this.shouldDirectionX*this.rad
-            this.pHandL.rotation.x -= this.handDirectionX*this.rad
+            //this.pHandL.rotation.x -= this.handDirectionX*this.rad
             this.pElbowL.rotation.z -= this.handDirectionZ*this.rad
             this.pElbowL.rotation.y += this.handDirectionY*this.rad   
         }
+    }
+
+    waveAnimation(hands, times, onEnd) {
+        if(!this.overWaving) {
+            if(this.pShoulderR.rotation.z > -60*this.rad) {
+                this.moveArms(this.UP, hands)
+            } else {
+                this.waveArms(hands)
+            }
+        } else {
+            if(this.pShoulderR.rotation.z < 90*this.rad) {
+                this.moveArms(this.DOWN, hands)
+            } else {
+                this.isWaving = this.NOWAVE
+                this.overWaving = false
+                this.waveCount = 0
+                return onEnd()
+            }
+        } 
+        
+
+        if(this.waveCount/2 === times) {
+            this.overWaving = true
+            
+        }
+    }
+
+    turn(degrees, onEnd) {
+        if(!this.overTurning) {
+            this.mainPivot.rotation.y += degrees*this.rad
+            this.overTurning = true
+        } else {
+            this.overTurning = false
+            return onEnd()
+        }
+        
+        
     }
 
     /**
@@ -386,34 +435,27 @@ class Castaway  {
      */
     update() {
        if(this.walking) {
-            this.walkAnimation()
+            this.walkAnimation(1, () => {
+                this.isWaving = this.ONEHAND
+            })
             this.mainPivot.position.z+= 0.025
         }
         if(this.isWaving !== this.NOWAVE) {
-            this.waveAnimation(this.isWaving)
+            this.waveAnimation(this.isWaving, 3, () => {
+                this.isTurning = true
+            })
+        }
+        if (this.isTurning) {
+            this.turn(90, () => {
+                this.isTurning = false
+                this.isWaving = this.TWOHANDS
+            })
         }
 
         if(this.head.rotation.x > -45*this.rad ) {
             this.head.rotation.x += -1*this.rad 
         }
 
-
-        if(this.currentSteps > .5){
-            if(this.pHipR.rotation.x < .01 && this.pHipR.rotation.x > -.01) {
-                this.walking = false
-                if(this.isWaving === this.NOWAVE) {
-                    this.startedWaving = new Date().getTime()
-                }
-                console.log(new Date().getTime() - this.startedWaving)
-                if(new Date().getMilliseconds() - this.startedWaving > 1000) {
-                    
-                    this.isWaving = this.TWOHANDS
-                } else {
-                    this.isWaving = this.TWOHANDS
-                }
-                
-            }
-        }
         
     }
 }
