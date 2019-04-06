@@ -13,7 +13,9 @@ class Castaway  {
         this.rad = Math.PI/180 
         this.walking = true
         this.isWaving = this.NOWAVE
+        this.overWaving = false
         this.currentSteps = 0
+        this.waveCount = 0
         this.ankleDirection = -1 //rendering option
         this.kneeDirection = 1 //rendering option
         this.hipDirection = -1 //rendering option
@@ -321,15 +323,15 @@ class Castaway  {
 
     moveArms(direction, hands) {
         if(direction === this.UP){
-            this.shouldDirectionX = -.45
-            this.shouldDirectionZ = -3
-            this.handDirectionX = -2
+            this.shouldDirectionX = -.6
+            this.shouldDirectionZ = -4
+            this.handDirectionX = -3
         }
 
         if(direction === this.DOWN) {
-            this.shouldDirectionX = .45
-            this.shouldDirectionZ = 3
-            this.handDirectionX = 2
+            this.shouldDirectionX = .6
+            this.shouldDirectionZ = 4
+            this.handDirectionX = 3
         }
         
         this.pShoulderR.rotation.z += this.shouldDirectionZ*this.rad
@@ -344,40 +346,51 @@ class Castaway  {
 
     }
 
-    waveAnimation(hands) {
-        if(this.pShoulderR.rotation.z > -60*this.rad) {
-            this.moveArms(this.UP, hands)
-        }
-        if(this.pShoulderR.rotation.z < -60*this.rad) {
-            console.log("hello")
-            this.shouldDirectionX = 0
-            this.shouldDirectionZ = 0
-            //this.handDirectionX = 0
-            //this.handDirectionZ = 0
-            if(this.pElbowR.rotation.z < -80*this.rad) {
-                this.handDirectionZ = 1
-                this.handDirectionY = -1
-                this.handDirectionX = -1.5
+    waveArms(hands) {
+        if(this.pElbowR.rotation.z < -80*this.rad) {
+            if(this.waveCount % 2 === 0) {
+                this.waveCount += 1
             }
-            if(this.pElbowR.rotation.z > -10*this.rad) {
-                this.handDirectionZ = -1
-                this.handDirectionY = 1
-                this.handDirectionX = 1.5
-            }
+            this.handDirectionZ = 2
+            this.handDirectionY = -2
+            this.handDirectionX = -3
         }
-        
-        this.pShoulderR.rotation.z += this.shouldDirectionZ*this.rad
-        this.pShoulderR.rotation.x += this.shouldDirectionX*this.rad
+        if(this.pElbowR.rotation.z > -10*this.rad) {
+            if(this.waveCount % 2 === 1 ||  this.waveCount % 2 === -1) {
+                this.waveCount += 1
+            }
+            this.handDirectionZ = -2
+            this.handDirectionY = 2
+            this.handDirectionX = 3
+        }
+
         this.pHandR.rotation.x += this.handDirectionX*this.rad
         this.pElbowR.rotation.z += this.handDirectionZ*this.rad
         this.pElbowR.rotation.y += this.handDirectionY*this.rad
 
         if(hands === this.TWOHANDS) {   
-            this.pShoulderL.rotation.z -= this.shouldDirectionZ*this.rad
-            this.pShoulderL.rotation.x += this.shouldDirectionX*this.rad
             this.pHandL.rotation.x -= this.handDirectionX*this.rad
             this.pElbowL.rotation.z -= this.handDirectionZ*this.rad
             this.pElbowL.rotation.y += this.handDirectionY*this.rad   
+        }
+    }
+
+    waveAnimation(hands, times) {
+        if(!this.overWaving) {
+            if(this.pShoulderR.rotation.z > -60*this.rad) {
+                this.moveArms(this.UP, hands)
+            } else {
+                this.waveArms(hands)
+            }
+        } else {
+            if(this.pShoulderR.rotation.z < 90*this.rad) {
+                this.moveArms(this.DOWN, hands)
+            }
+        } 
+        
+
+        if(this.waveCount/2 === times) {
+            this.overWaving = true
         }
     }
 
@@ -390,7 +403,7 @@ class Castaway  {
             this.mainPivot.position.z+= 0.025
         }
         if(this.isWaving !== this.NOWAVE) {
-            this.waveAnimation(this.isWaving)
+            this.waveAnimation(this.isWaving, 3)
         }
 
         if(this.head.rotation.x > -45*this.rad ) {
@@ -401,17 +414,7 @@ class Castaway  {
         if(this.currentSteps > .5){
             if(this.pHipR.rotation.x < .01 && this.pHipR.rotation.x > -.01) {
                 this.walking = false
-                if(this.isWaving === this.NOWAVE) {
-                    this.startedWaving = new Date().getTime()
-                }
-                console.log(new Date().getTime() - this.startedWaving)
-                if(new Date().getMilliseconds() - this.startedWaving > 1000) {
-                    
-                    this.isWaving = this.TWOHANDS
-                } else {
-                    this.isWaving = this.TWOHANDS
-                }
-                
+                this.isWaving = this.TWOHANDS
             }
         }
         
