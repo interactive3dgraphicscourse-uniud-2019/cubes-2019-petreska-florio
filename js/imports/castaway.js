@@ -11,6 +11,7 @@ class Castaway  {
         this.UP = 1
         this.DOWN = -1
         this.rad = Math.PI/180 
+        this.walkDirection = 0
         this.walking = true
         this.isWaving = this.NOWAVE
         this.isTurning = false
@@ -236,8 +237,8 @@ class Castaway  {
         this.mainPivot.add(neckBase)
 
         this.mainPivot.position.y = unit*10
-        this.mainPivot.position.x = unit*40
-        this.mainPivot.position.z = unit*-10
+        this.mainPivot.position.x = unit*60
+        this.mainPivot.position.z = unit*-33
 
         scene.add(this.mainPivot)
 
@@ -291,7 +292,6 @@ class Castaway  {
         if(this.pHipR.rotation.x < -30*this.rad) {
             if(this.currentSteps % 2 === 0){
                 this.currentSteps += 1
-                console.log(this.currentSteps)
             }
             this.hipDirection = 1
         } 
@@ -314,7 +314,7 @@ class Castaway  {
             this.ankleDirection = -1
         }
         
-        if(this.currentSteps/2 == steps) {
+        if(this.currentSteps == steps) {
             this.currentSteps = 0
             this.lastStep = true
             
@@ -322,6 +322,7 @@ class Castaway  {
 
         if(this.lastStep && this.pHipR.rotation.x < 0.1 && this.pHipR.rotation.x >-0.1) {
             this.walking = false
+            this.lastStep = false
             return onEnd()
         }
          
@@ -430,15 +431,29 @@ class Castaway  {
         
     }
 
+    randomElement(array) {
+        return array[Math.floor(Math.random()*array.length)];
+    }
+
     /**
      * update position of the castaway
      */
     update() {
        if(this.walking) {
-            this.walkAnimation(1, () => {
-                this.isWaving = this.ONEHAND
+            this.walkAnimation(3, () => {
+                let waving = [this.ONEHAND, this.TWOHANDS]
+                this.isWaving = this.randomElement(waving)
+                console.log(this.isWaving)
+                this.walkDirection++
             })
-            this.mainPivot.position.z+= 0.025
+            if(this.walkDirection % 4 === 0 ) 
+                this.mainPivot.position.z+= 0.02
+            else if (this.walkDirection % 4 === 1) 
+                this.mainPivot.position.x -= 0.02
+            else if(this.walkDirection % 4 === 2) 
+                this.mainPivot.position. z -= 0.02
+            else
+                this.mainPivot.position.x += 0.02
         }
         if(this.isWaving !== this.NOWAVE) {
             this.waveAnimation(this.isWaving, 3, () => {
@@ -446,13 +461,13 @@ class Castaway  {
             })
         }
         if (this.isTurning) {
-            this.turn(90, () => {
+            this.turn(-90, () => {
                 this.isTurning = false
-                this.isWaving = this.TWOHANDS
+                this.walking = true
             })
         }
 
-        if(this.head.rotation.x > -45*this.rad ) {
+        if(this.head.rotation.x > -30*this.rad ) {
             this.head.rotation.x += -1*this.rad 
         }
 

@@ -188,25 +188,29 @@ class Island  {
         var fireGeo1 = new THREE.BoxGeometry(0.1,0.1,0.1);
         var fireMat1 = new THREE.MeshLambertMaterial( { color: 0x180e01 } );
         var fire1 = new THREE.Mesh( fireGeo1, fireMat1 );
-        fire1.position.set(-1, 0.2, 1.3)
+        //fire1.position.set(-1, 0.2, 1.3)
+        fire1.position.set(0, 0.3, .7)
         fire1.castShadow = true;
         fire1.receiveShadow = true;
         pivot.add( fire1 );
         //duplication 3 more fire cubes
         var fire2 = fire1.clone();
-       fire2.position.set(-1.2, 0.2, 1.3); 
+        //fire2.position.set(-1.2, 0.2, 1.3); 
+       fire2.position.set(-.2, .3, .7); 
        fire2.castShadow = true;
        fire2.receiveShadow = true;
        pivot.add( fire2 );
 
        var fire3 = fire1.clone();
-       fire3.position.set(-1.1, 0.2, 1.2); 
+       //fire3.position.set(-1.1, 0.2, 1.2); 
+       fire3.position.set(-.1, .3, .6); 
        fire3.castShadow = true;
        fire3.receiveShadow = true;
        pivot.add( fire3 );
 
        var fire4 = fire1.clone();
-       fire4.position.set(-1.1, 0.2, 1.4); 
+       //fire4.position.set(-1.1, 0.2, 1.4); 
+       fire4.position.set(-.1, 0.3, .8); 
        fire4.castShadow = true;
        fire4.receiveShadow = true;
        pivot.add( fire4 );
@@ -215,7 +219,8 @@ class Island  {
        var bfireGeo1 = new THREE.BoxGeometry(0.08,0.2,0.1);
        var bfireMat1 = new THREE.MeshLambertMaterial( { color: 0xf8fc0d } );
        var bfire1 = new THREE.Mesh( bfireGeo1, bfireMat1 );
-       bfire1.position.set(-1.1, 0.2, 1.3)
+       //bfire1.position.set(-1.1, 0.2, 1.3)
+       bfire1.position.set(-.1, 0.3, .7)
        pivot.add( bfire1 );
 
        //burning fire2
@@ -225,11 +230,12 @@ class Island  {
            premultipliedAlpha: true,
            transparent: true, opacity: 0.3} );
        var bfire2 = new THREE.Mesh( bfireGeo2, bfireMat2 );
-       bfire2.position.set(-1.1, 0.2, 1.3)
+       //bfire2.position.set(-1.1, 0.2, 1.3)
+       bfire2.position.set(-.1, .3, .7)
        pivot.add( bfire2 );
 
         
-        // sea rock1
+        /* // sea rock1
         var rockgeo1 = new THREE.BoxGeometry(0.2,0.38,0.1);
         var rockmat1 = new THREE.MeshLambertMaterial( { color: 0x717a74 } );
         var rock1 = new THREE.Mesh( rockgeo1, rockmat1 );
@@ -297,7 +303,7 @@ class Island  {
       rock10.castShadow = true;
       rock10.receiveShadow = true;
       pivot.add( rock10 );  
-
+ */
        
     }
 }

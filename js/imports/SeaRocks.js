@@ -3,7 +3,7 @@ class SeaRocks  {
      * Create rocks in the sea water
      * @param {THREE.Scene} scene 
      */
-    constructor(scene) {
+    constructor(scene, px = 0, pz = 0) {
         var pivot = new THREE.Object3D()
       // sea rock1
       var rockgeo1 = new THREE.BoxGeometry(0.2,0.38,0.1);
@@ -73,5 +73,10 @@ class SeaRocks  {
     rock10.castShadow = true;
     rock10.receiveShadow = true;
     pivot.add( rock10 ); 
+    
+    pivot.position.set(px, 0, pz)
+    scene.add(pivot)
+
+
     }
 }
