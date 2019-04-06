@@ -105,6 +105,7 @@ blocchi mancanti. Abbiamo fatto cambiamenti sull'ombra e abbiamo reso il mare pi
 Dopodichè abbiamo unito la figura del naufrago con la scena dell'isola e la palma. Con questa modifica siamo state costrette a cambiare le dimensioni dal naufrago e dall'isola per adattarsi insieme.
 
 È stato deciso quali compiti futuri dovremmo svolgere per migliorare e completare questo progetto. Ed è stato discusso come procedere ulteriormente con la creazione e la modifica del video.
+![](images/island0.png)
 
 ## 03.04.2019
 
