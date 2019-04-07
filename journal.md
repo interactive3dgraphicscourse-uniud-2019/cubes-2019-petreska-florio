@@ -130,6 +130,8 @@ Infine è stata utilizzata la classe delle rocce marine per crearne 4 in 4 posti
 
 Decisione di concludere qui la parte da consegnare e dedicarsi a post processing del video di presentazione.
 
+Video post-processing con il software Shotcut, che è uno strumento libero per il montaggio video digitale. Abbiamo usato un audio con le onde del mare e la vocina del naufrago che grida "Help!". 
+
 
 
 
