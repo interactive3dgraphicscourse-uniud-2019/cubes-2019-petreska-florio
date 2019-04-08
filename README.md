@@ -4,7 +4,7 @@ Autori:
 - Petreska Viktorija [Matr n. 123800]
 
 ## Descrizione del Progetto
-Il  progetto consiste in una rappresentazione stilizzata (in quanto costituita da soli cubi in Three.js) di un'**isola in mezzo al mare su cui è intrappolato un naufrago** che si sbraccia per chiedere aiuto.
+Il  progetto consiste in una rappresentazione stilizzata (costituita da soli cubi) in Three.js di un'**isola in mezzo al mare su cui è intrappolato un naufrago** che si sbraccia per chiedere aiuto.
 
 ## Struttura del Progetto
 Il progetto è ospitato su Github all'URL https://github.com/interactive3dgraphicscourse-uniud-2019/cubes-2019-petreska-florio. Il contenuto del repository è il seguente:
@@ -37,7 +37,7 @@ cubes-2019-petreska-florio
 └── index.html
 ```
 
-Il contenuto di file e cartelle è il seguente:
+Il contenuto di file e cartelle è:
 - `js/main.js` è il file con gli script `Start()` (setup della scena) e `Update()` (aggiornamento della scena per ogni animation frame)
 - `js/lib` in questa cartella sono contenute le librerie esterne
 - `js/imports` contiene le classi dove vengono definiti gli oggetti della scena
@@ -59,14 +59,14 @@ Un video mostra il risultato ottenuto dall'animazione: https://github.com/intera
 
 Vi è un altro video in cui sono stati aggiunti alcuni effetti sonori: https://github.com/interactive3dgraphicscourse-uniud-2019/cubes-2019-petreska-florio/blob/master/video/pre.avi.
 
-Vi è infine il video di presentazione, con ulteriore post-processing e revisione degli elementi sonori: https://github.com/interactive3dgraphicscourse-uniud-2019/cubes-2019-petreska-florio/blob/master/video/final.mp4.
+Vi è infine il video di presentazione, con ulteriore post-processing: https://github.com/interactive3dgraphicscourse-uniud-2019/cubes-2019-petreska-florio/blob/master/video/final.mp4.
 
 
 ### Prestazioni
 Il frame-rate della scena e relativa animazione, testato utilizzando un Dell G3 3579 con Intel i7-8750H, 16GB di RAM e Nvidia GTX1060 Max-Q, è di **60 fps** su Windows 10 Pro e Google Chrome Version 73.0.3683.86 (Official Build) (64-bit).
 
 ## Progettazione e sviluppo
-Abbiamo come prima cosa ipotizzato uno scenario e gli elementi fondamentali che lo compongono. Ci siamo quindi fatte un'idea della forma che potrebbero avere tali elementi, giungendo a due prototipi:
+Abbiamo come prima cosa ipotizzato lo scenario caratterizzante e pensato agli elementi fondamentali che lo compongono. Ci siamo quindi fatte un'idea della forma che potrebbero avere, giungendo a due prototipi:
 
 ### isola con la palma
 ![](images/island.png)
