@@ -1,6 +1,6 @@
 # Castaway - Report del Progetto
 Autori:
-- Florio Gioia Silvia [Matr n. 119328]
+- Florio Silvia Gioia [Matr n. 119328]
 - Petreska Viktorija [Matr n. 123800]
 
 ## Descrizione del Progetto
@@ -44,7 +44,7 @@ Il contenuto di file e cartelle è:
 - `css/main.css`
 - `images` screen capture e altre immagini utilizzate nel journal e nella documentazione in genere
 - `textures` 
-- `video` contiene due screen cast: uno non rielaborato, con registrazione 60FPS; uno rielaborato, con aggiunta di suoni
+- `video` contiene tre screen cast: uno non rielaborato, con registrazione 60FPS; uno rielaborato, con aggiunta di suoni e un ultimo di presentazione
  - `journal.md` registro giornaliero dei progressi sul progetto
 - `README.md` il presente file
 - `index.html` è il file HTML con le referenze ai file JS e CSS che danno vita al progetto 
@@ -66,7 +66,7 @@ Vi è infine il video di presentazione, con ulteriore post-processing: https://g
 Il frame-rate della scena e relativa animazione, testato utilizzando un Dell G3 3579 con Intel i7-8750H, 16GB di RAM e Nvidia GTX1060 Max-Q, è di **60 fps** su Windows 10 Pro e Google Chrome Version 73.0.3683.86 (Official Build) (64-bit).
 
 ## Progettazione e sviluppo
-Abbiamo come prima cosa ipotizzato lo scenario caratterizzante e pensato agli elementi fondamentali che lo compongono. Ci siamo quindi fatte un'idea della forma che potrebbero avere, giungendo a due prototipi:
+Abbiamo come prima cosa ipotizzato lo scenario caratterizzante e pensato agli elementi fondamentali che lo compongono. Ci siamo quindi fatte un'idea della forma che potrebbero avere questi elementi, giungendo a due prototipi:
 
 ### isola con la palma
 ![](images/island.png)
@@ -76,7 +76,7 @@ Abbiamo come prima cosa ipotizzato lo scenario caratterizzante e pensato agli el
 
 Ci siamo a questo punto suddivise i compiti e iniziato lo sviluppo, concordando di utilizzare branch diversi così da sfruttare git nel lavoro in parallelo.
 
-Dopodichè abbiamo unito i diversi elementi, operando opportune trasformazioni (rese facili dalla parametrizzazione del naufrago - `js/imports/Castaway.js`), arrivando a una prima versione del progetto:
+Dopodichè abbiamo unito i diversi elementi, operando opportune trasformazioni (traslazioni e ridimensionamenti, resi facili dalla parametrizzazione del naufrago - `js/imports/Castaway.js`), arrivando a una prima versione del progetto:
 
 ![](images/fire&searocks.png)
 
@@ -153,6 +153,6 @@ Per la realizzazione del progetto sono stati utilizzati i seguenti strumenti:
 
 ## Possibili Miglioramenti
 Rispetto al risultato attualmente raggiunto, sono previsti i seguenti miglioramenti ed estensioni:
-* Refactoring del Codice: estensione della classe `THREE.Mesh` da parte delle classi degli oggetti da noi create (così da poterli clonare) 
+* Refactoring del Codice: estensione della classe `THREE.Mesh` da parte delle classi degli oggetti da noi create (così da poterli clonare ed esseguire altre operazioni caratteristiche delle mesh) 
 * Includere direttamente in Three.js gli effetti audio
 * Ottimizzazioni varie per migliorare le performance
