@@ -1,4 +1,4 @@
-# Isola Sperduta - Report del Progetto
+# Castaway - Report del Progetto
 Autori:
 - Florio Gioia Silvia [Matr n. 119328]
 - Petreska Viktorija [Matr n. 123800]
