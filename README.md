@@ -57,7 +57,9 @@ Il risultato raggiunto è il seguente:
 
 Un video mostra il risultato ottenuto dall'animazione: https://github.com/interactive3dgraphicscourse-uniud-2019/cubes-2019-petreska-florio/blob/master/video/60FPS.mp4.
 
-Vi è infine il video con post-processing ed inserimento di elementi sonori: https://github.com/interactive3dgraphicscourse-uniud-2019/cubes-2019-petreska-florio/blob/master/video/final.mp4.
+Vi è un altro video in cui sono stati aggiunti alcuni effetti sonori: https://github.com/interactive3dgraphicscourse-uniud-2019/cubes-2019-petreska-florio/blob/master/video/pre.avi.
+
+Vi è infine il video di presentazione, con ulteriore post-processing e revisione degli elementi sonori: https://github.com/interactive3dgraphicscourse-uniud-2019/cubes-2019-petreska-florio/blob/master/video/final.mp4.
 
 
 ### Prestazioni
@@ -133,9 +135,10 @@ Le animazioni riguardanti il naufrago sono tre:
 Il risultato finale è il naufrago che gira intorno all'isola e, ad ogni angolo, si sbraccia per chiedere aiuto, con una o due braccia alzate (la selezione avviene casualmente).
 
 ## Video
-Abbiamo registrato due video del progetto:
+Abbiamo registrato tre video del progetto:
 - un video (su Dell G3 3579) utilizzando le funzionalità native di registrazione video di Windows 10 Pro, ottenendo 60FPS: `video/60FPS.mp4`
-- un video di cui è stato fatto il  post-processing con il software Shotcut e a cui sono stati aggiunti effetti sonori: `video/final.mp4`
+- un video registrato con modalità analoghe alle precedenti e su cui sono state aggiunte delle clip sonore: `video/pre.avi`
+- il video di presentazione con post-processing tramite software Shotcut: `video/final.mp4`
 
 ### Suoni
 Nel video di cui è stato fatto il post-processing sono state integrate delle clip audio con le onde del mare, una musica di sottofondo, nonchè la voce del naufrago che grida "Help!". 
@@ -144,10 +147,11 @@ Nel video di cui è stato fatto il post-processing sono state integrate delle cl
 Per la realizzazione del progetto sono stati utilizzati i seguenti strumenti:
 - **MagicaVoxel**: creazione dei prototipi
 - **Visual Studio Code**:  coding JS
+- **VSDC Video Editor**: post-processing video
 - **Shotcut**: post-processing video
 
 ## Possibili Miglioramenti
 Rispetto al risultato attualmente raggiunto, sono previsti i seguenti miglioramenti ed estensioni:
 * Refactoring del Codice: estensione della classe `THREE.Mesh` da parte delle classi degli oggetti da noi create (così da poterli clonare) 
-* Migliorare la selezione degli effetti sonori nel video
+* Includere direttamente in Three.js gli effetti audio
 * Ottimizzazioni varie per migliorare le performance

@@ -132,7 +132,11 @@ Decisione di concludere qui la parte da consegnare e dedicarsi a post processing
 
 Video post-processing con il software Shotcut, che è uno strumento libero per il montaggio video digitale. Abbiamo usato un audio con le onde del mare e la vocina del naufrago che grida "Help!". 
 
+## 07.04.2019
 
+E' stato creato un video in anteprima per mostrare le prestazioni ottenibili a 60FPS e con un basilare inserimento audio.
+
+E' stata creata la relazione conclusiva.
 
 
 
