@@ -82,6 +82,7 @@ Dopodichè abbiamo unito i diversi elementi, operando opportune trasformazioni (
 
 Successivamente abbiamo esteso l'isola e creato l'animazione con cui il naufrago vi gira attorno, oltre ad aver utilizzato la classe `js/imports/SeaRocks.js` per creare 4 istanze delle rocce nel mare. Siamo così giunte al risultato finale, di cui sono stati realizzati gli screencast.
 
+Gli avanzamenti specifici sul progetto possono essere letti nel file `journal.md` e/o nei commit di questo repository.
 
 ## Composizione della scena
 Abbiamo valutato la possibilità di strutturare il progetto in classi per gli oggetti della scena (naufrago e isola) per una maggiore leggibilità del codice e una più facile divisione del lavoro.
@@ -141,12 +142,12 @@ Abbiamo registrato tre video del progetto:
 - il video di presentazione con post-processing tramite software Shotcut: `video/final.mp4`
 
 ### Suoni
-Nel video di cui è stato fatto il post-processing sono state integrate delle clip audio con le onde del mare, una musica di sottofondo, nonchè la voce del naufrago che grida "Help!". 
+Nei video di cui è stato fatto il post-processing sono state integrate delle clip audio con le onde del mare, una musica di sottofondo, nonchè la voce del naufrago che grida "Help!". 
 
 ## Strumenti
 Per la realizzazione del progetto sono stati utilizzati i seguenti strumenti:
 - **MagicaVoxel**: creazione dei prototipi
-- **Visual Studio Code**:  coding JS
+- **Visual Studio Code**: coding JS e markdown
 - **VSDC Video Editor**: post-processing video
 - **Shotcut**: post-processing video
 
