@@ -134,9 +134,10 @@ Video post-processing con il software Shotcut, che è uno strumento libero per i
 
 ## 07.04.2019
 
-E' stato creato un video in anteprima per mostrare le prestazioni ottenibili a 60FPS e con un basilare inserimento audio.
+E' stato creato un video in anteprima per mostrare il risultato a 60FPS e con un basilare inserimento audio attraverso il programma VSDC Video Editor. Le clip sono state reperite dal sito freesound.org.
 
 E' stata creata la relazione conclusiva.
 
+![](images/video.png)
 
 
