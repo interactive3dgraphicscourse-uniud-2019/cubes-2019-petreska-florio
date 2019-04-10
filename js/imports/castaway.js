@@ -5,6 +5,7 @@ class Castaway  {
      * @param {THREE.Scene} scene 
      */
     constructor(scene) {
+        /* animation parameters */
         this.NOWAVE = 0
         this.ONEHAND = 1
         this.TWOHANDS = 2
@@ -18,7 +19,6 @@ class Castaway  {
         this.overTurning = false
         this.overWaving = false
         this.currentSteps = 0
-        this.lastStep = false
         this.waveCount = 0
         this.ankleDirection = -1 //rendering option
         this.kneeDirection = 1 //rendering option
@@ -287,78 +287,100 @@ class Castaway  {
       
         return jointAndBone
     }
-    
-    /* @TODO more natural animation */ 
+    /**
+     * move both legs to simulate a walk
+     * @param {Number} steps number of steps castaway should walk
+     * @param {Function} onEnd callback function when walking is over
+     * @returns executed function
+    */ 
     walkAnimation(steps, onEnd) {
-
+        /* if hip didn't rotate forward until 30 degrees yet */
         if(this.pHipR.rotation.x < -30*this.rad) {
-            if(this.currentSteps % 2 === 0){
+            if(this.currentSteps % 2 === 0){ //check to increase steps counter
                 this.currentSteps += 1
             }
-            this.hipDirection = 1
+            this.hipDirection = 1 // hip direction forward
         } 
+        /* if hip didn't rotate backward until 30 degrees yet */
         if(this.pHipR.rotation.x > 30*this.rad) {
-            if(this.currentSteps % 2 === 1 ||  this.currentSteps % 2 === -1) {
+            if(this.currentSteps % 2 === 1 ||  this.currentSteps % 2 === -1) { // check to increase steps counter
                 this.currentSteps += 1
             }
-            this.hipDirection = -1
+            this.hipDirection = -1 // hip rotation direction backward
         } 
+
+        /* if knee didn't rotate forward until 0 degrees yet */
         if(this.pKnee.rotation.x < 0) {
-            this.kneeDirection = 1
+            this.kneeDirection = 1 // knee rotation direction forward
         } 
+        /* if knee didn't rotate forward until 0 degrees yet */
         if(this.pKnee.rotation.x > 20*this.rad) {
             this.kneeDirection = -1
-        }  
+        } 
+
+        /* 
         if(this.pAnkle.rotation.x  < -25*this.rad) {
             this.ankleDirection = 1
         } 
         if(this.pAnkle.rotation.x > 40*this.rad) {
             this.ankleDirection = -1
         }
+        */
         
-        if(this.currentSteps == steps) {
+        /* when is done walking */
+        if(this.currentSteps == steps && this.pHipR.rotation.x < 0.1 && this.pHipR.rotation.x >-0.1) {
             this.currentSteps = 0
-            this.lastStep = true
-            
-        }
-
-        if(this.lastStep && this.pHipR.rotation.x < 0.1 && this.pHipR.rotation.x >-0.1) {
             this.walking = false
-            this.lastStep = false
             return onEnd()
         }
          
+        /* use these parameters to move all junctions and perform walk animation (not moving forward) */
+        
+        /*right leg */
         //this.pAnkle.rotation.x += this.ankleDirection*this.rad 
         this.pKnee.rotation.x += 2*this.kneeDirection*this.rad
         this.pHipR.rotation.x += 2*this.hipDirection*this.rad
+        
+        /*left arm*/
         this.pElbowL.rotation.y += 2*this.kneeDirection*this.rad
         this.pShoulderL.rotation.x += 2*this.hipDirection*this.rad
 
+        /*left leg */
         //this.pAnkleL.rotation.x += this.ankleDirection*this.rad 
         this.pKneeL.rotation.x += 2*this.kneeDirection*this.rad 
         this.pHipL.rotation.x += 2*this.hipDirection*-1*this.rad
+        
+        /* right arm */
         this.pElbowR.rotation.y += 2*this.kneeDirection*this.rad
         this.pShoulderR.rotation.x += 2*this.hipDirection*-1*this.rad
 
     }
 
+    /** 
+     * function to rise or take down one or two hands
+     * @param {Number} direction code to define if moving arms up or down
+     * @param {Number} hands code to define if one or two arms to be moved
+    */
     moveArms(direction, hands) {
+        /* parameters to rise up arms */
         if(direction === this.UP){
             this.shouldDirectionX = -.6
             this.shouldDirectionZ = -4
             this.handDirectionX = -3
         }
-
+        /* parameters to take down arms */
         if(direction === this.DOWN) {
             this.shouldDirectionX = .6
             this.shouldDirectionZ = 4
             this.handDirectionX = 3
         }
         
+        /* move arms based on these parameters */
+        /* right hand */
         this.pShoulderR.rotation.z += this.shouldDirectionZ*this.rad
         this.pShoulderR.rotation.x += this.shouldDirectionX*this.rad
         this.pHandR.rotation.x += this.handDirectionX*this.rad
-
+        /* optional left hand */
         if(hands === this.TWOHANDS) {   
             this.pShoulderL.rotation.z -= this.shouldDirectionZ*this.rad
             this.pShoulderL.rotation.x += this.shouldDirectionX*this.rad
@@ -367,7 +389,12 @@ class Castaway  {
 
     }
 
+    /** 
+     * function to wave hand or hands
+     * @param {Number} hands code to define if one or two arms to be moved
+    */
     waveArms(hands) {
+        /* parameters to move arms toward head */
         if(this.pElbowR.rotation.z < -80*this.rad) {
             if(this.waveCount % 2 === 0) {
                 this.waveCount += 1
@@ -376,6 +403,7 @@ class Castaway  {
             this.handDirectionY = -2
             this.handDirectionX = -3
         }
+        /* parameters to move arms further from the head */
         if(this.pElbowR.rotation.z > -10*this.rad) {
             if(this.waveCount % 2 === 1 ||  this.waveCount % 2 === -1) {
                 this.waveCount += 1
@@ -385,43 +413,58 @@ class Castaway  {
             this.handDirectionX = 3
         }
 
-        //this.pHandR.rotation.x += this.handDirectionX*this.rad
+        /* use parameters to move arms */
+        /* right arm */
         this.pElbowR.rotation.z += this.handDirectionZ*this.rad
         this.pElbowR.rotation.y += this.handDirectionY*this.rad
-
+        /* optional left arm */
         if(hands === this.TWOHANDS) {   
-            //this.pHandL.rotation.x -= this.handDirectionX*this.rad
             this.pElbowL.rotation.z -= this.handDirectionZ*this.rad
             this.pElbowL.rotation.y += this.handDirectionY*this.rad   
         }
     }
 
+    /** 
+     * function to wave hand or hands asking for help an arbitrary number of times
+     * @param {Number} hands code to define if one or two arms to be moved
+     * @param {Number} times number of waves
+     * @param {Function} onEnd function called when animation ends
+    */
     waveAnimation(hands, times, onEnd) {
+        /* if waving is not over yet - or not begun */
         if(!this.overWaving) {
+            /* if arms are not up yet */
             if(this.pShoulderR.rotation.z > -60*this.rad) {
-                this.moveArms(this.UP, hands)
+                this.moveArms(this.UP, hands) // move arms uo
             } else {
-                this.waveArms(hands)
+                this.waveArms(hands) // wave
             }
         } else {
+            /* if arms are not down yet */
             if(this.pShoulderR.rotation.z < 90*this.rad) {
-                this.moveArms(this.DOWN, hands)
+                this.moveArms(this.DOWN, hands) // move arms down
             } else {
-                this.isWaving = this.NOWAVE
-                this.overWaving = false
+                /* wave variables */
+                this.isWaving = this.NOWAVE 
+                this.overWaving = false 
                 this.waveCount = 0
-                return onEnd()
+                return onEnd() 
             }
         } 
         
-
+        /* if castaway waved enough */
         if(this.waveCount/2 === times) {
             this.overWaving = true
-            
         }
     }
 
+    /** 
+     * function to turn castaway on its y axis a certain amount of degrees
+     * @param {Number} degrees rotation angle in degrees
+     * @param {Function} onEnd function called when animation ends
+    */
     turn(degrees, onEnd) {
+        /* if turning is not over yet */
         if(!this.overTurning) {
             this.mainPivot.rotation.y += degrees*this.rad
             this.overTurning = true
@@ -433,6 +476,10 @@ class Castaway  {
         
     }
 
+    /**
+     * utility function to select randomly from an array
+     * @param {any[]} array  
+     */
     randomElement(array) {
         return array[Math.floor(Math.random()*array.length)];
     }
@@ -441,17 +488,22 @@ class Castaway  {
      * update position of the castaway
      */
     update() {
+        /* if frame rate is grater than 60, wait - not necessary in threejs, but good to keep in mind
         this.currentFrameTime = Date.now()
         if(this.currentFrameTime - this.prevFrameTime < 15) {
             return
         }
+        */
+
+        /* animation loop */
+        /* walk */
         if(this.walking) {
                 this.walkAnimation(3, () => {
+                    /* over walking, start waving */
                     let waving = [this.ONEHAND, this.TWOHANDS]
-                    this.isWaving = this.randomElement(waving)
-                    console.log(this.isWaving)
-                    this.walkDirection++
+                    this.isWaving = this.randomElement(waving)                   
                 })
+                /* move in the walk direction */
                 if(this.walkDirection % 4 === 0 ) 
                     this.mainPivot.position.z+= 0.02
                 else if (this.walkDirection % 4 === 1) 
@@ -461,23 +513,24 @@ class Castaway  {
                 else
                     this.mainPivot.position.x += 0.02
             }
+            /* wave */
             if(this.isWaving !== this.NOWAVE) {
                 this.waveAnimation(this.isWaving, 3, () => {
+                    /* over waving, start turning */
                     this.isTurning = true
                 })
             }
+            /* turn */
             if (this.isTurning) {
                 this.turn(-90, () => {
+                    /* over turning, start walking again toward new direction */
                     this.isTurning = false
+                    this.walkDirection++
                     this.walking = true
                 })
             }
 
-            if(this.head.rotation.x > -30*this.rad ) {
-                this.head.rotation.x += -1*this.rad 
-            }
-
-            this.prevFrameTime = this.currentFrameTime
+            // this.prevFrameTime = this.currentFrameTime - utility for frame rate adjustment
 
         
     }
