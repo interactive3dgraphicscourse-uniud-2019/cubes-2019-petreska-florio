@@ -140,4 +140,16 @@ E' stata creata la relazione conclusiva.
 
 ![](images/video.png)
 
+## 11.04.2019
+
+E' stato commentato il codice della classe Castaway per renderlo più leggibile e meglio utilizzabile. Approfittato per rileggere il codice e togliere alcune parti inutili o mal strutturate.
+
+Inoltre è stata provata l'estensione da parte delle nostre classi della classe Mesh per operare funzioni della classe Mesh come il clone(). La prova è stata fatta sulle rocce ed ha avuto successo, in quanto sono state clonate e poi spostate nelle nuove posizioni senza problemi.
+
+Tentativo di riservare lo stesso trattamento alla classe del naufrago, non andato altrettanto bene, in quanto il naufrago ha una struttura più complessa e utilizza delle variabili locali che non permettono l'estensione immediata come nella classe SeaRocks.
+
+In sospeso in attesa di ulteriori approfondimenti.
+
+
+
 
