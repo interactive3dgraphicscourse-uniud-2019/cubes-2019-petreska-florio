@@ -1,9 +1,9 @@
-class SeaRocks  {
+class SeaRocks extends THREE.Mesh  {
     /**
      * Create rocks in the sea water
      * @param {THREE.Scene} scene 
      */
-    constructor(scene, px = 0, pz = 0) {
+    constructor(px = 0, pz = 0) {
         var pivot = new THREE.Object3D()
       // sea rock1
       var rockgeo1 = new THREE.BoxGeometry(0.2,0.38,0.1);
@@ -75,7 +75,8 @@ class SeaRocks  {
     pivot.add( rock10 ); 
     
     pivot.position.set(px, 0, pz)
-    scene.add(pivot)
+    
+    return pivot
 
 
     }

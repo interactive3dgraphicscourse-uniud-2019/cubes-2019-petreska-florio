@@ -22,10 +22,20 @@
 
 			var palmtree = new PalmTree(scene)
 
-			var searock = new SeaRocks(scene)
-			var searock2 = new SeaRocks(scene, 5, 0)
-			var searock3 = new SeaRocks(scene, 5, -5)
-			var searock4 = new SeaRocks(scene, -3, -2)
+			var searock = new SeaRocks()
+			scene.add(searock)
+			
+			var searock2 = searock.clone()
+			searock.position.set(5, 0, 0)
+			scene.add(searock2)
+
+			var searock3 = searock.clone()
+			searock3.position.z = -5
+			scene.add(searock3)
+
+			var searock4 = searock.clone()
+			searock4.position.set(-3, 0, -3)
+			scene.add(searock4)
 
 
 			hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
