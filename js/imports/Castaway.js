@@ -20,9 +20,9 @@ class Castaway  {
         this.overWaving = false
         this.currentSteps = 0
         this.waveCount = 0
-        this.ankleDirection = -1 //rendering option
-        this.kneeDirection = 1 //rendering option
-        this.hipDirection = -1 //rendering option
+        this.ankleDirection = -1 
+        this.kneeDirection = 1 
+        this.hipDirection = -1 
         this.shouldDirectionX = -.45
         this.shouldDirectionZ = -3
         this.handDirectionX = -2
