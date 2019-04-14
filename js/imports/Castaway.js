@@ -4,8 +4,9 @@ class Castaway  {
      * Create a castaway
      * @param {THREE.Scene} scene 
      */
-    constructor(scene) {
+    constructor(scene, listener) {
         /* animation parameters */
+        this.listener = listener
         this.NOWAVE = 0
         this.ONEHAND = 1
         this.TWOHANDS = 2
@@ -241,6 +242,9 @@ class Castaway  {
         this.mainPivot.position.y = unit*10
         this.mainPivot.position.x = unit*60
         this.mainPivot.position.z = unit*-33
+        
+        
+
 
         scene.add(this.mainPivot)
 
@@ -450,7 +454,7 @@ class Castaway  {
                 this.waveCount = 0
                 return onEnd() 
             }
-        } 
+        }
         
         /* if castaway waved enough */
         if(this.waveCount/2 === times) {
@@ -501,7 +505,17 @@ class Castaway  {
                 this.walkAnimation(3, () => {
                     /* over walking, start waving */
                     let waving = [this.ONEHAND, this.TWOHANDS]
-                    this.isWaving = this.randomElement(waving)                   
+                    this.isWaving = this.randomElement(waving)
+                    let help = new THREE.PositionalAudio( this.listener )
+
+                    let audioLoader = new THREE.AudioLoader();
+                    audioLoader.load( 'sounds/help.ogg', function( buffer ) {
+                        help.setBuffer( buffer );
+                        help.setVolume( 1 );
+                        help.play()
+                    });	
+
+                    this.head.add(help)                   
                 })
                 /* move in the walk direction */
                 if(this.walkDirection % 4 === 0 ) 
