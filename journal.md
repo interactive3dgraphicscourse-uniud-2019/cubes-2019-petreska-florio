@@ -150,6 +150,13 @@ Tentativo di riservare lo stesso trattamento alla classe del naufrago, non andat
 
 In sospeso in attesa di ulteriori approfondimenti.
 
+## 13-14.04.2019   
+Inserimento degli effetti sonori all'interno dell'applicazione stessa. 
+
+La musica calypso di sottofondo viene eseguita in loop ed è ambientale, mentre il naufrago che chiede aiuto ha la voce direzionale proveniente dalla testa.
+
+I suoni si possono mettere in pausa grazie ad un pulsante in alto a destra.
+
 
 
 
