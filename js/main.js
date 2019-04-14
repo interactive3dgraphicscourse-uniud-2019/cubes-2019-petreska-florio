@@ -1,7 +1,15 @@
 
         /* Starting code */   
-		var scene, camera, renderer, controls, stats, castaway;
+		var scene, camera, renderer, controls, stats, castaway, music;
 		
+		function audioClick() {
+			if(music.isPlaying) {
+				music.pause()
+			} else {
+				music.play()
+			}
+		}
+
 		function Start() {
 			scene = new THREE.Scene();
 			camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -61,15 +69,15 @@
 			let listener = new THREE.AudioListener();
 			camera.add( listener );
 
-			let sound = new THREE.Audio( listener );
+			music = new THREE.Audio( listener );
 
 			let audioLoader = new THREE.AudioLoader();
 			audioLoader.load( 'sounds/bg-music.mp3', function( buffer ) {
-				sound.setBuffer( buffer );
-				sound.setLoop( true );
-				sound.setVolume( .4 );
-				sound.play();
-			});	
+				music.setBuffer( buffer );
+				music.setLoop( true );
+				music.setVolume( .4 );
+				music.play();
+			});
 			
 			var island = new Island()
 			scene.add(island)
@@ -102,6 +110,7 @@
 			controls.update();  
 			stats.update();
 			castaway.update() //project code
+			
 			Render();
 		}
 		
