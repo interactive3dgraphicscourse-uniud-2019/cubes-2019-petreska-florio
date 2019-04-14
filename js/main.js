@@ -18,9 +18,11 @@
 			camera.position.set(2,2,2);
 			camera.lookAt( new THREE.Vector3(0,0,0));
 
-			var island = new Island(scene)
+			var island = new Island()
+			scene.add(island)
 
-			var palmtree = new PalmTree(scene)
+			var palmtree = new PalmTree()
+			scene.add(palmtree)
 
 			var searock = new SeaRocks()
 			scene.add(searock)
@@ -36,7 +38,6 @@
 			var searock4 = searock.clone()
 			searock4.position.set(-3, 0, -3)
 			scene.add(searock4)
-
 
 			hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
 			hemiLight.color.setHSL( 0.6, 1, 0.6 );

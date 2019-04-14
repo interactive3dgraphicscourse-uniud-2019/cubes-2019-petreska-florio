@@ -1,7 +1,8 @@
 class SeaRocks extends THREE.Mesh  {
     /**
      * Create rocks in the sea water
-     * @param {THREE.Scene} scene 
+     * @param {Number} px x coordinate of center 
+     * @param {Number} py y coordinate of center
      */
     constructor(px = 0, pz = 0) {
         var pivot = new THREE.Object3D()

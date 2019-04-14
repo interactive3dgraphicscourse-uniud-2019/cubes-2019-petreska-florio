@@ -1,9 +1,8 @@
 class PalmTree  {
     /**
      * Create a palm tree 
-     * @param {THREE.Scene} scene 
      */
-    constructor(scene) {
+    constructor() {
         //palm tree box 0
 		var geometry4 = new THREE.BoxGeometry(0.2,0.2,0.2);
 		var material4 = new THREE.MeshLambertMaterial( { color: 0x65341f } );
