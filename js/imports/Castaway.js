@@ -2,11 +2,14 @@
 class Castaway  {
     /**
      * Create a castaway
-     * @param {THREE.Scene} scene 
+     * @param {THREE.Scene} scene
+     * @param {THREE.Scene} listener audio listener of the scene
+     * @param {THREE.Scene} music background music - used to synchronize help sound 
      */
-    constructor(scene, listener) {
+    constructor(scene, listener, music) {
         /* animation parameters */
         this.listener = listener
+        this.music = music
         this.NOWAVE = 0
         this.ONEHAND = 1
         this.TWOHANDS = 2
@@ -32,6 +35,7 @@ class Castaway  {
         this.startedWaving = 0
         this.prevFrameTime = 0
         this.currentFrameTime = 0
+        this.musicCounter = 0
         
         var unit = .02 // dimensions of one basic cube
         this.bodyMaterial = new THREE.MeshLambertMaterial({color: 0xc68642}) // material for the skin
@@ -506,16 +510,18 @@ class Castaway  {
                     /* over walking, start waving */
                     let waving = [this.ONEHAND, this.TWOHANDS]
                     this.isWaving = this.randomElement(waving)
-                    let help = new THREE.PositionalAudio( this.listener )
 
-                    let audioLoader = new THREE.AudioLoader();
-                    audioLoader.load( 'sounds/help.ogg', function( buffer ) {
-                        help.setBuffer( buffer );
-                        help.setVolume( 1 );
-                        help.play()
-                    });	
-
-                    this.head.add(help)                   
+                    if(this.music.isPlaying || this.musicCounter === 0) {
+                        let help = new THREE.PositionalAudio( this.listener )
+                        let audioLoader = new THREE.AudioLoader();
+                        audioLoader.load( 'sounds/help.ogg', function( buffer ) {
+                            help.setBuffer( buffer );
+                            help.setVolume( 1 );
+                            help.play()
+                        });	
+                        this.head.add(help)      
+                        this.musicCounter++
+                    }             
                 })
                 /* move in the walk direction */
                 if(this.walkDirection % 4 === 0 ) 

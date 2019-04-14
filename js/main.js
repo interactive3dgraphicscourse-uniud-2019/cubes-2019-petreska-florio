@@ -8,6 +8,17 @@
 			} else {
 				music.play()
 			}
+
+			changeIcon()
+		}
+
+		function changeIcon() {
+			if(document.getElementById("sound-control").firstChild.classList.contains("fa-volume-up")) {
+				document.getElementById("sound-control").innerHTML = "<i class='fa  fa-volume-mute'></i>"
+			} else {
+				document.getElementById("sound-control").innerHTML = "<i class='fa  fa-volume-up'></i>"
+			}
+			
 		}
 
 		function Start() {
@@ -100,7 +111,7 @@
 			searock4.position.set(-3, 0, -3)
 			scene.add(searock4)
 
-			castaway = new Castaway(scene, listener)
+			castaway = new Castaway(scene, listener, music)
 			
 			
 		}

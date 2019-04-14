@@ -13,5 +13,9 @@ canvas {
 #sound-control  {
     position: absolute;
     top: 1em;
-    right: 1em;
+    right: 2em;
+    font-size: 3em;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
