@@ -7,7 +7,7 @@ class Island extends THREE.Mesh {
 
         //beach ground n.1
         var geometry = new THREE.BoxGeometry(3,0.2,3);
-        var texture = THREE.ImageUtils.loadTexture('textures/sand01.jpg');
+        var texture = new THREE.TextureLoader().load('textures/sand.jpg');
         var material = new THREE.MeshLambertMaterial( { map: texture } );
         texture.repeat.set(4,4);
         texture.wrapS =THREE.RepeatWraping;
@@ -20,7 +20,7 @@ class Island extends THREE.Mesh {
 
         //beach ground n.2
         var geometry1 = new THREE.BoxGeometry(1.6,0.2,1.8);
-        var texture1 = THREE.ImageUtils.loadTexture('textures/sand01.jpg');
+        var texture1 = new THREE.TextureLoader().load('textures/sand.jpg');
         var material1 = new THREE.MeshLambertMaterial( { map: texture1 } );
         texture1.repeat.set(2,2);
         texture1.wrapS =THREE.RepeatWraping;
@@ -35,7 +35,7 @@ class Island extends THREE.Mesh {
 
         //beach ground n.3
         var geometry2 = new THREE.BoxGeometry(1,0.3,1);
-        var texture2 = THREE.ImageUtils.loadTexture('textures/sand01.jpg');
+        var texture2 = new THREE.TextureLoader().load('textures/sand.jpg');
         texture2.repeat.set(1,1);
         texture2.wrapS =THREE.RepeatWraping;
         texture2.wrapT = THREE.RepeatWraping;
@@ -50,7 +50,7 @@ class Island extends THREE.Mesh {
         
         //sea cube
         var geometry3 = new THREE.BoxGeometry(30.1,0.2,30.1);
-        var texture3 = THREE.ImageUtils.loadTexture('textures/sea01.jpg');
+        var texture3 = new THREE.TextureLoader().load('textures/sea.jpg');
         texture3.repeat.set(10,10);
         texture3.wrapS =THREE.RepeatWraping;
         texture3.wrapT = THREE.RepeatWraping;
@@ -67,7 +67,7 @@ class Island extends THREE.Mesh {
         
         //beach ground same as sea cube
         var geometry5 = new THREE.BoxGeometry(30,0.1,30);
-        var texture5 = THREE.ImageUtils.loadTexture('textures/sand01.jpg');
+        var texture5 = new THREE.TextureLoader().load('textures/sand.jpg');
         var material5 = new THREE.MeshLambertMaterial( { map: texture5 } );
         texture5.repeat.set(10,10);
         texture5.wrapS =THREE.RepeatWraping;
@@ -84,7 +84,7 @@ class Island extends THREE.Mesh {
 
         //small parts beach ground n.1 
         var smallPartGroundGeo1 = new THREE.BoxGeometry(2.6,0.2,0.1);
-        var smallPartGroundText1= THREE.ImageUtils.loadTexture('textures/sand01.jpg');
+        var smallPartGroundText1= new THREE.TextureLoader().load('textures/sand.jpg');
         var smallPartGroundMat1 = new THREE.MeshLambertMaterial( { map: smallPartGroundText1 } );
         smallPartGroundText1.repeat.set(5,1);
         smallPartGroundText1.wrapS =THREE.RepeatWraping;
@@ -118,7 +118,7 @@ class Island extends THREE.Mesh {
 
          //small parts beach ground n.2 
          var smallPartGroundGeo5 = new THREE.BoxGeometry(1.3,0.2,0.1);
-         var smallPartGroundText5= THREE.ImageUtils.loadTexture('textures/sand01.jpg');
+         var smallPartGroundText5= new THREE.TextureLoader().load('textures/sand.jpg');
          var smallPartGroundMat5 = new THREE.MeshLambertMaterial( { map: smallPartGroundText5 } );
          smallPartGroundText1.repeat.set(2,0.5);
          smallPartGroundText1.wrapS =THREE.RepeatWraping;
@@ -150,7 +150,7 @@ class Island extends THREE.Mesh {
 
         //small parts beach ground n.3
         var smallPartGroundGeo9 = new THREE.BoxGeometry(0.7,0.2,0.1);
-        var smallPartGroundText9= THREE.ImageUtils.loadTexture('textures/sand01.jpg');
+        var smallPartGroundText9= new THREE.TextureLoader().load('textures/sand.jpg');
         var smallPartGroundMat9 = new THREE.MeshLambertMaterial( { map: smallPartGroundText9 } );
         smallPartGroundText1.repeat.set(10,1);
         smallPartGroundText1.wrapS =THREE.RepeatWraping;

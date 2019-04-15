@@ -35,7 +35,6 @@ class Castaway  {
         this.startedWaving = 0
         this.prevFrameTime = 0
         this.currentFrameTime = 0
-        this.musicCounter = 0
         
         var unit = .02 // dimensions of one basic cube
         this.bodyMaterial = new THREE.MeshLambertMaterial({color: 0xc68642}) // material for the skin
@@ -303,14 +302,14 @@ class Castaway  {
     */ 
     walkAnimation(steps, onEnd) {
         /* if hip didn't rotate forward until 30 degrees yet */
-        if(this.pHipR.rotation.x < -30*this.rad) {
+        if(this.pHipR.rotation.x > -40*this.rad && this.pHipR.rotation.x < -30*this.rad) {
             if(this.currentSteps % 2 === 0){ //check to increase steps counter
                 this.currentSteps += 1
             }
             this.hipDirection = 1 // hip direction forward
         } 
         /* if hip didn't rotate backward until 30 degrees yet */
-        if(this.pHipR.rotation.x > 30*this.rad) {
+        if(this.pHipR.rotation.x < 40*this.rad && this.pHipR.rotation.x > 30*this.rad) {
             if(this.currentSteps % 2 === 1 ||  this.currentSteps % 2 === -1) { // check to increase steps counter
                 this.currentSteps += 1
             }
@@ -318,11 +317,11 @@ class Castaway  {
         } 
 
         /* if knee didn't rotate forward until 0 degrees yet */
-        if(this.pKnee.rotation.x < 0) {
+        if(this.pKnee.rotation.x > -10*this.rad && this.pKnee.rotation.x < 0) {
             this.kneeDirection = 1 // knee rotation direction forward
         } 
         /* if knee didn't rotate forward until 0 degrees yet */
-        if(this.pKnee.rotation.x > 20*this.rad) {
+        if(this.pKnee.rotation.x < 30*this.rad && this.pKnee.rotation.x > 20*this.rad) {
             this.kneeDirection = -1
         } 
 
@@ -511,7 +510,7 @@ class Castaway  {
                     let waving = [this.ONEHAND, this.TWOHANDS]
                     this.isWaving = this.randomElement(waving)
 
-                    if(this.music.isPlaying || this.musicCounter === 0) {
+                    if(this.music && this.music.isPlaying) {
                         let help = new THREE.PositionalAudio( this.listener )
                         let audioLoader = new THREE.AudioLoader();
                         audioLoader.load( 'sounds/help.ogg', function( buffer ) {
@@ -520,7 +519,6 @@ class Castaway  {
                             help.play()
                         });	
                         this.head.add(help)      
-                        this.musicCounter++
                     }             
                 })
                 /* move in the walk direction */

@@ -1,14 +1,25 @@
 
         /* Starting code */   
-		var scene, camera, renderer, controls, stats, castaway, music;
+		var scene, camera, renderer, controls, stats, castaway, music, listener, cameraRotation;
 		
 		function audioClick() {
-			if(music.isPlaying) {
-				music.pause()
-			} else {
-				music.play()
-			}
+			if(!music) {
+				music = new THREE.Audio( listener );
 
+				let audioLoader = new THREE.AudioLoader();
+				audioLoader.load( 'sounds/bg-music-small.mp3', function( buffer ) {
+					music.setBuffer( buffer )
+					music.setLoop( true )
+					music.setVolume( .4 )
+					music.play()
+				})
+			} else {
+				if(music.isPlaying) {
+					music.pause()
+				} else {
+					music.play()
+				}
+			}
 			changeIcon()
 		}
 
@@ -34,8 +45,10 @@
 			renderer.shadowMap.enabled = true;
 			document.body.appendChild( renderer.domElement );
 			
-			camera.position.set(2,2,2);
+			camera.position.set(5,5,5);
 			camera.lookAt( new THREE.Vector3(0,0,0));
+
+			cameraRotation = 0
 
 			hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
 			hemiLight.color.setHSL( 0.6, 1, 0.6 );
@@ -77,19 +90,9 @@
 			/* Project code */
 			
 			/* background music */
-			let listener = new THREE.AudioListener();
+			listener = new THREE.AudioListener();
 			camera.add( listener );
 
-			music = new THREE.Audio( listener );
-
-			let audioLoader = new THREE.AudioLoader();
-			audioLoader.load( 'sounds/bg-music.mp3', function( buffer ) {
-				music.setBuffer( buffer );
-				music.setLoop( true );
-				music.setVolume( .4 );
-				music.play();
-			});
-			
 			var island = new Island()
 			scene.add(island)
 
@@ -121,7 +124,9 @@
 			controls.update();  
 			stats.update();
 			castaway.update() //project code
-			
+			cameraRotation += .01
+			camera.position.x = Math.sin(cameraRotation)*5
+			camera.position.z = Math.cos(cameraRotation)*5
 			Render();
 		}
 		
