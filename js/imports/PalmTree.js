@@ -1,9 +1,10 @@
-class PalmTree  {
+class PalmTree extends THREE.Mesh {
     /**
      * Create a palm tree 
      */
     constructor() {
-        //palm tree box 0
+		//palm tree box 0
+		super()
 		var geometry4 = new THREE.BoxGeometry(0.2,0.2,0.2);
 		var material4 = new THREE.MeshLambertMaterial( { color: 0x65341f } );
 		var cube4 = new THREE.Mesh( geometry4, material4 );
