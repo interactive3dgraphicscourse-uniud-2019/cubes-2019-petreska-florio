@@ -1,6 +1,6 @@
 
         /* Starting code */   
-		var scene, camera, renderer, controls, stats, castaway, music, listener, cameraRotation;
+		var scene, camera, renderer, controls, stats, castaway, music, listener, cameraRotation, cameraRotate, initialZoomIn,  cameraZoomIn, zoomDirection, zoomSpeed, currentFrameTime, keyFrameTime, initialTime;
 		
 		function audioClick() {
 			if(!music) {
@@ -33,6 +33,9 @@
 		}
 
 		function Start() {
+			currentFrameTime = Date.now()
+			keyFrameTime = currentFrameTime
+			initialTime = currentFrameTime
 			scene = new THREE.Scene();
 			camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
@@ -45,10 +48,15 @@
 			renderer.shadowMap.enabled = true;
 			document.body.appendChild( renderer.domElement );
 			
-			camera.position.set(5,5,5);
+			camera.position.set(0,1,25);
 			camera.lookAt( new THREE.Vector3(0,0,0));
 
 			cameraRotation = 0
+			cameraRotate = false
+			cameraZoomIn = false
+			initialZoomIn = true
+			zoomDirection = new THREE.Vector3(0,0,-1)
+			zoomSpeed = -.05
 
 			hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
 			hemiLight.color.setHSL( 0.6, 1, 0.6 );
@@ -84,8 +92,8 @@
 			// uncomment if you need to draw coordinate axes when building the scene
 			//Coordinates.drawAllAxes();
 			
-			controls = new THREE.OrbitControls( camera );
-			controls.addEventListener( 'change', Render );
+			//controls = new THREE.OrbitControls( camera );
+			//controls.addEventListener( 'change', Render );
 
 			/* Project code */
 			
@@ -120,13 +128,60 @@
 		}
 		
 		function Update() {
+			
+			currentFrameTime = Date.now()
+
 			requestAnimationFrame( Update );
-			controls.update();  
+			//controls.update();  
 			stats.update();
 			castaway.update() //project code
-			cameraRotation += .01
-			camera.position.x = Math.sin(cameraRotation)*5
-			camera.position.z = Math.cos(cameraRotation)*5
+			
+			if(camera.position.z < 6) {
+				if(initialZoomIn) {
+					initialZoomIn = false
+					keyFrameTime = currentFrameTime
+				}
+				if(currentFrameTime - keyFrameTime > 3000 && currentFrameTime - initialTime < 11000) {
+					cameraRotate = true
+				}
+				
+			}
+
+			if(cameraRotation > 119*Math.PI/180 && cameraRotation < 121*Math.PI/180) {
+				if(cameraRotate) {
+					cameraRotate = false
+					initialZoomIn = false
+					keyFrameTime = currentFrameTime
+				}
+				if(currentFrameTime - keyFrameTime > 2500) {
+					cameraZoomIn = true
+					zoomSpeed = -.02
+				}
+			}
+
+			if(cameraZoomIn && currentFrameTime - keyFrameTime > 5000) {
+				cameraZoomIn = false
+			}
+
+			if(cameraRotate) {
+				cameraRotation += .004	
+				camera.position.x = Math.sin(cameraRotation)*6
+				camera.position.z = Math.cos(cameraRotation)*6
+				camera.lookAt(new THREE.Vector3(0,0,0))
+			}
+
+			if(initialZoomIn) {
+				camera.position.z += zoomSpeed
+				camera.lookAt(new THREE.Vector3(0,0,0))
+			}
+
+			if(cameraZoomIn) {
+				console.log("here")
+				camera.translateZ(zoomSpeed)
+			}
+
+			
+			
 			Render();
 		}
 		
