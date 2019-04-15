@@ -157,6 +157,15 @@ La musica calypso di sottofondo viene eseguita in loop ed è ambientale, mentre 
 
 I suoni si possono mettere in pausa grazie ad un pulsante in alto a destra.
 
+## 15.04.2019  
+Inserimento di movimenti di camera preimpostati per facilitare la registrazione di un nuovo video di presentazione a 60 fps.
+
+Risoluzione di alcuni warning riguardanti principalmente le texture:
+- dimensioni rese quadrate e a 256x256
+- cambio del metodo di caricamento da loadTexture (deprecato) a new TextureLoader().load()
+
+
+
 
 
 
